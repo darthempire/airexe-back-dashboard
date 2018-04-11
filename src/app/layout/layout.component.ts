@@ -23,7 +23,7 @@ export class LayoutComponent implements OnInit {
         }
 
         if (this.router.url === '/') {
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/verification-queue']);
         }
     }
 

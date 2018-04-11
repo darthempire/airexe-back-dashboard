@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './dashboard.component';
+import { VerificationQueueComponent } from './verification-queue.component';
 
 const routes: Routes = [
-    { path: '', component: DashboardComponent }
+    { path: '', component: VerificationQueueComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule { }
+export class VerificationQueueRoutingModule { }

@@ -9,14 +9,12 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   {
-      path: '/dashboard',
-      title: 'General Information',
+      path: '/verification-queue',
+      title: 'Verification Qeue',
       icon: 'bubble_chart',
       class: ''
   },
-  { path: '/market-status', title: 'Market Status', icon: 'bubble_chart', class: '' },
-  { path: '/profile', title: 'My Account', icon: 'bubble_chart', class: '' },
-  { path: '/pre-verification', title: 'Pre-Verification Form', icon: 'bubble_chart', class: '' }
+  { path: '/statistic', title: 'Statistic', icon: 'bubble_chart', class: '' }
 
 ];
 

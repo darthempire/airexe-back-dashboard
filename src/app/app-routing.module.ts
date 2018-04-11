@@ -8,7 +8,6 @@ const routes: Routes = [
         loadChildren: './layout/layout.module#LayoutModule',
         canActivate: [AuthGuard]
     },
-    { path: 'login', loadChildren: './login/login.module#LoginModule' },
     { path: 'registration', loadChildren: './registration/registration.module#RegistrationModule' },
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
     { path: '**', redirectTo: 'not-found' }
