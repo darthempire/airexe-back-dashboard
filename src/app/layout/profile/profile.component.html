@@ -43,41 +43,47 @@
     <br>
     <br>
     <div class=' table-responsive'>
-            <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Status</th>
-                            <th scope="col">Count of users</th>
-                            <th scope="col">AIRX/user</th>
-                            <th scope="col">AIRX earned</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">New users not confirmed email</th>
-                            <td>{{this.referrersData.Status0}}</td>
-                            <td>{{this.staticData.Status0}}</td>
-                            <td>{{this.referrersData.Status0 * this.staticData.Status0}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Users confirmed their email login</th>
-                            <td>{{this.referrersData.Status2}}</td>
-                            <td>{{this.staticData.Status2}}</td>
-                            <td>{{this.referrersData.Status2 * this.staticData.Status2}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Verified users</th>
-                            <td>{{this.referrersData.Status6}}</td>
-                            <td>{{this.staticData.Status6}}</td>
-                            <td>{{this.referrersData.Status6 * this.staticData.Status6}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Not verified users</th>
-                            <td>{{this.referrersData.Status10}}</td>
-                            <td>{{this.staticData.Status10}}</td>
-                            <td>{{this.referrersData.Status10 * this.staticData.Status10}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <h5>Users registeres with your referral link:</h5>
+        <table class="table table-bordered table-hover">
+            <caption>From registration referral program your earned
+                  {{this.referrersData.Status0 * this.staticData.Status0 +
+                    this.referrersData.Status2 * this.staticData.Status2 +
+                    this.referrersData.Status6 * this.staticData.Status6 +
+                    this.referrersData.Status10 * this.staticData.Status10}} AIRX tokens</caption>
+            <thead>
+                <tr class='table-success'>
+                    <th scope="col">Status</th>
+                    <th scope="col">Count of users</th>
+                    <th scope="col">AIRX/user</th>
+                    <th scope="col">AIRX earned</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">New users not confirmed email</th>
+                    <td>{{this.referrersData.Status0}}</td>
+                    <td>{{this.staticData.Status0}}</td>
+                    <td>{{this.referrersData.Status0 * this.staticData.Status0}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Users confirmed their email login</th>
+                    <td>{{this.referrersData.Status2}}</td>
+                    <td>{{this.staticData.Status2}}</td>
+                    <td>{{this.referrersData.Status2 * this.staticData.Status2}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Verified users</th>
+                    <td>{{this.referrersData.Status6}}</td>
+                    <td>{{this.staticData.Status6}}</td>
+                    <td>{{this.referrersData.Status6 * this.staticData.Status6}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Not verified users</th>
+                    <td>{{this.referrersData.Status10}}</td>
+                    <td>{{this.staticData.Status10}}</td>
+                    <td>{{this.referrersData.Status10 * this.staticData.Status10}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
