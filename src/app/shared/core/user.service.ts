@@ -71,4 +71,10 @@ export class UserService {
     getStaticData() {
         return this.http.get(`../../../assets/data/referrers.json`);
     }
+
+    getUsers(skip, take) {
+        return this.http.get(
+            `${environment.apiUrl}users/?skip=${skip}&take=${take}`
+        );
+    }
 }

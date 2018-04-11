@@ -1,3 +1,24 @@
-<p>
-  verification-queue works!
-</p>
+<div class="table-responsive margin">
+    <table class="table table-hover user-table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Update Date</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Waiting</th>
+                <th scope="col">Validated</th>
+                <th scope="col">Manage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let user of users'>
+                <th scope="row">{{user.id}}</th>
+                <td>{{user.updateDate | date: 'short'}}</td>
+                <td>{{user.createdDate | date: 'short'}}</td>
+                <td>{{user.waiting}}</td>
+                <td>{{user.validated}}</td>
+                <td><button class="btn btn-default">Manage</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
