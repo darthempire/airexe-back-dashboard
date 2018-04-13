@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UserService } from './../../shared/core/user.service';
+import { LoaderService } from './../../shared/core/loader.service';
 
 import * as _ from 'lodash';
 
@@ -10,7 +11,6 @@ import * as _ from 'lodash';
     styleUrls: ['./verification-queue.component.css']
 })
 export class VerificationQueueComponent implements OnInit {
-
     searchModel: any = {
         skip: 0,
         take: 20
@@ -18,18 +18,22 @@ export class VerificationQueueComponent implements OnInit {
 
     users: any = new Array();
 
-    constructor(private userService: UserService) {}
+    constructor(private userService: UserService, private loaderService: LoaderService) {}
 
     ngOnInit() {
         this.getUsers();
     }
 
     getUsers() {
-        this.userService.getUsers(this.searchModel.skip, this.searchModel.take)
+        this.loaderService.display(true);
+        this.userService
+            .getUsers(this.searchModel.skip, this.searchModel.take)
             .then(data => {
                 this.prepareDataToTable(JSON.parse(data['_body']));
+                this.loaderService.display(false);
             })
             .catch(err => {
+                this.loaderService.display(false);
                 console.log(err);
             });
     }
@@ -41,8 +45,25 @@ export class VerificationQueueComponent implements OnInit {
             this.users.push(user);
         }
     }
-}
 
+    next() {
+        this.searchModel.skip += 20;
+        this.searchModel.take += 20;
+        this.cleanusers();
+        this.getUsers();
+    }
+
+    previous() {
+        this.searchModel.skip -= 20;
+        this.searchModel.take -= 20;
+        this.cleanusers();
+        this.getUsers();
+    }
+
+    cleanusers() {
+        this.users = new Array();
+    }
+}
 
 enum AttributeTypes {
     Email = '1050',

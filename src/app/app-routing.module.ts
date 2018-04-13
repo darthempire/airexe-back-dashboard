@@ -10,7 +10,7 @@ const routes: Routes = [
     },
     { path: 'registration', loadChildren: './registration/registration.module#RegistrationModule' },
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
-    { path: '**', redirectTo: 'not-found' }
+    // { path: '**', redirectTo: 'not-found' }
 ];
 
 @NgModule({

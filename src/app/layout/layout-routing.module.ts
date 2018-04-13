@@ -10,7 +10,7 @@ const routes: Routes = [
         children: [
             { path: 'verification-queue', loadChildren: './verification-queue/verification-queue.module#VerificationQueueModule' },
             { path: 'statistic', loadChildren: './statistic/statistic.module#StatisticModule' },
-            { path: 'user', component: UserComponent }
+            { path: 'verification-queue/user/:id', component: UserComponent }
         ]
     }
 ];

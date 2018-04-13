@@ -18,6 +18,12 @@ export class UserService {
         );
     }
 
+    getUserById(userId) {
+        return this.http.get(
+            `${environment.apiUrl}users/` + userId
+        );
+    }
+
     updateAttributes(data) {
         return this.http.put(
             `${environment.apiUrl}users/${
@@ -62,6 +68,11 @@ export class UserService {
             .catch(err => {
                 console.log(err);
             });
+    }
+
+    getSourseBlob(id) {
+        return this.http
+            .download(`${environment.apiUrl}sources/${id}`);
     }
 
     getReferrers() {

@@ -17,8 +17,20 @@
                 <td>{{user.createdDate | date: 'short'}}</td>
                 <td>{{user.waiting}}</td>
                 <td>{{user.validated}}</td>
-                <td><button class="btn btn-default">Manage</button></td>
+                <td>
+                    <button class="btn btn-default" [routerLink]="['user', user.id]">Manage</button>
+                </td>
             </tr>
         </tbody>
     </table>
 </div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" [hidden]='searchModel.skip === 0' (click)='previous()'>Previous</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" (click)='next()'>Next</a>
+        </li>
+    </ul>
+</nav>

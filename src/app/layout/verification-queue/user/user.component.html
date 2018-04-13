@@ -1,3 +1,10 @@
-<p>
-  user works!
-</p>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a [routerLink]="['/verification-queue']">Verification Queue</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">User Manager</li>
+    </ol>
+</nav>
+
+<p>{{getAttribute('1050').Value}}</p>
