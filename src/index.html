@@ -13,8 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" type="text/html" href="styles.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <meta name="description" content="AIREXE cryptocurrency fiat exchange">
     <meta name="author" content="AIREXE">
@@ -56,7 +55,10 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114371425-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
 
         gtag('config', 'UA-114371425-1');
@@ -64,17 +66,19 @@
 
     <script>
         /**
-        * Function that tracks a click on an outbound link in Analytics.
-        * This function takes a valid URL string as an argument, and uses that URL string
-        * as the event label. Setting the transport method to 'beacon' lets the hit be sent
-        * using 'navigator.sendBeacon' in browser that support it.
-        */
-        var trackOutboundLink = function (url) {
+         * Function that tracks a click on an outbound link in Analytics.
+         * This function takes a valid URL string as an argument, and uses that URL string
+         * as the event label. Setting the transport method to 'beacon' lets the hit be sent
+         * using 'navigator.sendBeacon' in browser that support it.
+         */
+        var trackOutboundLink = function(url) {
             gtag('event', 'click', {
                 'event_category': 'outbound',
                 'event_label': url,
                 'transport_type': 'beacon',
-                'event_callback': function () { document.location = url; }
+                'event_callback': function() {
+                    document.location = url;
+                }
             });
         }
     </script>
@@ -91,37 +95,57 @@
         </div>
     </app-root>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script>
-            (function ($) {
+        (function($) {
 
-                $(window).resize(function () {
+            $(window).resize(function() {
 
-                    checkSidebar();
-                });
+                checkSidebar();
+            });
 
-                function checkSidebar() {
+            function checkSidebar() {
 
-                    if ($(window).width() < 991) {
-                        $("#sidebar").addClass('d-none');
-                        $("#wrapper").removeClass('col-10');
-                        $("#wrapper").addClass('col-12');
-                    } else {
-                        $("#sidebar").removeClass('d-none');
-                        $("#wrapper").removeClass('col-12');
-                        $("#wrapper").addClass('col-10');
-                    }
+                if ($(window).width() < 991) {
+                    $("#sidebar").addClass('d-none');
+                    $("#wrapper").removeClass('col-10');
+                    $("#wrapper").addClass('col-12');
+                } else {
+                    $("#sidebar").removeClass('d-none');
+                    $("#wrapper").removeClass('col-12');
+                    $("#wrapper").addClass('col-10');
                 }
+            }
+            //не работает
+            // $(".toggle_radio").click(function() {
+            //     console.log('toggle jivi');
+            // });
 
-            })(jQuery);
 
+
+            // $(".toggle_radio .toggle_option").change(function() {
+            //     console.log('toggle jivi');
+            //     if ($(this).is(":checked")) {
+            //         var val = $(this).val();
+            //         console.log(val + " clicked");
+            //         if (val == 1) {
+            //             $('.toggle_radio').addClass('no');
+            //             $('.toggle_radio').removeClass('yes');
+            //         } else if (val == 3) {
+            //             $('.toggle_radio').addClass('yes');
+            //             $('.toggle_radio').removeClass('no');
+            //         } else {
+            //             $('.toggle_radio').removeClass('yes');
+            //             $('.toggle_radio').removeClass('no');
+            //         }
+            //     }
+            // });
+        })(jQuery);
     </script>
+    <script type="application/javascript" src="D:/github_main/airexe-back-dashboard/src/main.js"></script>
 
 </body>
 
