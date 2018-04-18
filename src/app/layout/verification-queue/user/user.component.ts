@@ -18,11 +18,13 @@ export class UserComponent implements OnInit {
 
     private id: number;
     user: any;
+    attributeTypes: any;
 
     private routeSubscription: Subscription;
 
     constructor(private route: ActivatedRoute, private userService: UserService, private loaderService: LoaderService) {
         this.routeSubscription = route.params.subscribe(params => this.id = params['id']);
+        this.attributeTypes = AttributeTypes;
     }
 
     ngOnInit() {
