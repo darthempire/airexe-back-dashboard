@@ -12,7 +12,7 @@
         <div class="col-12">
             <label for="">
                 <b>userID</b>
-                <span>xxx</span>
+                <span>{{id}}</span>
             </label>
             <label for="" class="ml-5">
                 <b>Created date</b>
@@ -45,7 +45,14 @@
                     </span>
                     <span class="badge badge-warning"> Waiting verification</span>
                 </label>
-                <button class="float-right">toggle</button>
+                <div class="btn-group btn-group-toggle  btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input type="radio" name="options" id="Passport_On" value="" checked="checked">Validate</label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="Passport_On_NA" />Waiting</label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="Passport_On_Reject" />Reject</label>
+                </div>
             </div>
         </div>
         <div class="col-md-6 col-sm-12">
@@ -58,15 +65,14 @@
                         </span>
                     </span>
                 </label>
-                <input value='{{getAttribute(attributeTypes.FirstName)}}' type="text" class="form-control width-custom mr-custom" id="Name"
-                    name='firstname' required>
-
+                <input value='{{getAttribute(attributeTypes.FirstName)}}' type="text" class="form-control width-custom mr-custom" id="Name" name='firstname' required>
                 <!-- [hidden]='!(userData.FirstName.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.FirstName.validation =    = 2)' -->
                 <span class="badge badge-danger">Rejected</span>
                 <!-- [hidden]='!(userData.FirstName.validation == 0)' -->
                 <span class="badge badge-warning">Waiting verification</span>
+
             </div>
             <div class="form-group">
                 <!-- [(ngModel)]='userData.Surname.value' -->
@@ -77,22 +83,14 @@
                         </span>
                     </span>
                 </label>
-                <input value='{{getAttribute(attributeTypes.Surname)}}' type="text" class="form-control width-custom mr-custom" id="Surname"
-                    name='Surname'>
-                <div class="toggle_radio float-right">
-                    <input type="radio" class="toggle_option" id="surname_ok" name="toggle_option" value="">
-                    <input type="radio" checked class="toggle_option" id="surname_na" name="toggle_option" value="" checked>
-                    <input type="radio" class="toggle_option" id="surname_reject" name="toggle_option" value="">
-                    <label for="surname_ok" class="bg-success">
-                        <p>OK</p>
-                    </label>
-                    <label for="surname_na">
-                        <p> </p>
-                    </label>
-                    <label for="surname_reject" class="bg-danger">
-                        <p>Reject</p>
-                    </label>
-                    <div class="toggle_option_slider"></div>
+                <input type="text" value='{{getAttribute(attributeTypes.Surname)}}' class="form-control width-custom mr-custom" id="Surname" name='Surname'>
+                <div class="btn-group default-position  btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input type="radio" name="options" id="Surname_On">Validate</label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="Surname_NA" />Waiting</label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="Surname_Reject" />Reject</label>
                 </div>
                 <!-- [hidden]='!(userData.Surname.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
@@ -104,20 +102,27 @@
             <div class="form-group">
                 <!-- [(ngModel)]='userData.MiddleName.value' -->
                 <label for="MiddleName" class="col-form-label">Middle Name: </label>
-                <input type="text" class="form-control  width-custom mr-custom" id="MiddleName" name='MiddleName'>
+                <input type="text" value='{{getAttribute(attributeTypes.MiddleName)}}' class="form-control  width-custom mr-custom" id="MiddleName" name='MiddleName'>
                 <!-- [hidden]='!(userData.MiddleName.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.MiddleName.validation == 2)' -->
                 <span class="badge badge-danger">Rejected</span>
                 <!-- [hidden]='!(userData.MiddleName.validation == 0)' -->
                 <span class="badge badge-warning">Waiting verification</span>
-                <div class="toggle_radio float-right">
-                    <input type="radio" class="toggle_option" id="middleName_ok" name="toggle_option" value="{{getAttribute(attributeTypes.MiddleName)}}">
-                    <input type="radio" checked class="toggle_option" id="middleName_na" name="toggle_option" value="{{getAttribute(attributeTypes.MiddleName)}}"
-                        checked>
+                <div class="btn-group default-position  btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input type="radio" name="options" id="MiddleName_On">Validatd</label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="MiddleName_NA"/>Waiting</label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="MiddleName_Reject" />Reject</label>
+                </div>
+                <!-- <div class="toggle_radio float-right">
+                    <input type="radio" class="toggle_option" id="iddleName_вValidated" name="toggle_option" value="{{getAttribute(attributeTypes.MiddleName)}}">
+                    <input type="radio" checked class="toggle_option" id="middleName_na" name="toggle_option" value="{{getAttribute(attributeTypes.MiddleName)}}" checked>
                     <input type="radio" class="toggle_option" id="middleName_reject" name="toggle_option" value="{{getAttribute(attributeTypes.MiddleName)}}">
-                    <label for="middleName_ok" class="bg-success">
-                        <p>OK</p>
+                    <label for="iddleName_вValidated" class="bg-success">
+                        <p>Validated</p>
                     </label>
                     <label for="middleName_na">
                         <p> </p>
@@ -126,7 +131,7 @@
                         <p>Reject</p>
                     </label>
                     <div class="toggle_option_slider"></div>
-                </div>
+                </div> -->
             </div>
             <div class="form-group">
                 <!-- [(ngModel)]='userData.Gender.value' -->
@@ -141,6 +146,14 @@
                     <option value="1">Male</option>
                     <option value="0">Female</option>
                 </select>
+                <div class="btn-group default-position  btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input type="radio" name="options" id="Gender_On">Validate</label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="Gender_NA" />Waiting</label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="Gender_Reject" />Reject</label>
+                </div>
                 <!-- [hidden]='!(userData.Gender.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.Gender.validation == 2)' -->
@@ -157,7 +170,8 @@
                         </span>
                     </span>
                 </label>
-                <input type="date" class="form-control  width-custom mr-custom" id="BirthDate" name='BirthDate'>
+                <input type="date" value='{{getAttribute(attributeTypes.BirthDate)}}' class="form-control  width-custom mr-custom" id="BirthDate" name='BirthDate'>
+
                 <!-- [hidden]='!(userData.BirthDate.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.BirthDate.validation == 2)' -->
@@ -180,6 +194,14 @@
                     <option value="3">National ID</option>
                     <option value="4">International ID</option>
                 </select>
+                <div class="btn-group default-position  btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input type="radio" name="options" id="PassportType_On">Validate</label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="PassportType_NA" />Waiting</label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="PassportType_Reject" />Reject</label>
+                </div>
                 <!-- [hidden]='!(userData.PassportType.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.PassportType.validation == 2)' -->
@@ -196,7 +218,15 @@
                         </span>
                     </span>
                 </label>
-                <input type="text" class="form-control  width-custom mr-custom" id="PassportNumber" name='PassportNumber'>
+                <input type="text" value='{{getAttribute(attributeTypes.PassportNumber)}}' class="form-control  width-custom mr-custom" id="PassportNumber" name='PassportNumber'>
+                <div class="btn-group default-position  btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input type="radio" name="options" id="PassportNumber_On">Validate</label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="PassportNumber_NA" />Waiting</label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="PassportNumber_Reject" />Reject</label>
+                </div>
                 <!-- [hidden]='!(userData.PassportNumber.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.PassportNumber.validation == 2)' -->
@@ -213,7 +243,15 @@
                         </span>
                     </span>
                 </label>
-                <input type="date" class="form-control  width-custom mr-custom" id="PassportIssueDate" name='PassportIssueDate'>
+                <input type="date" value='{{getAttribute(attributeTypes.PassportIssueDate)}}' class="form-control  width-custom mr-custom" id="PassportIssueDate" name='PassportIssueDate'>
+                <div class="btn-group default-position  btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input type="radio" name="options" id="PassportIssueDate_On">Validate</label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="PassportIssueDate_NA" />Waiting</label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="PassportIssueDate_Reject" />Reject</label>
+                </div>
                 <!-- [hidden]='!(userData.PassportIssueDate.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.PassportIssueDate.validation == 2)' -->
@@ -225,6 +263,14 @@
                 <!-- [(ngModel)]='userData.PassportExpirationDate.value' -->
                 <label for="PassportExpirationDate" class="col-form-label">Passport/ID Expiration Date: </label>
                 <input type="date" class="form-control  width-custom mr-custom" id="PassportExpirationDate" name='PassportExpirationDate'>
+                <div class="btn-group default-position  btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input type="radio" name="options" id="PassportExpirationDate_On">Validate</label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="PassportExpirationDate_NA" />Waiting</label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="PassportExpirationDate_Reject" />Reject</label>
+                </div>
                 <!-- [hidden]='!(userData.PassportExpirationDate.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.PassportExpirationDate.validation == 2)' -->
@@ -244,7 +290,14 @@
                     </span>
                     <span class="badge badge-warning"> Waiting verification</span>
                 </label>
-                <button class="float-right">toggle</button>
+                <div class="btn-group   btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input type="radio" name="options" id="Address_On">Validate</label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="Address_NA" />Waiting</label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="Address_Reject" />Reject</label>
+                </div>
             </div>
         </div>
         <div class="col-md-6 col-sm-12">
@@ -278,7 +331,7 @@
                     </span>
                 </label>
                 <!-- [(ngModel)]='userData.Zip.value' -->
-                <input type="text" class="form-control  width-custom mr-custom" id="Zip" name='Zip'>
+                <input type="text" value='{{getAttribute(attributeTypes.Zip)}}' class="form-control  width-custom mr-custom" id="Zip" name='Zip'>
                 <!-- [hidden]='!(userData.Zip.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.Zip.validation == 2)' -->
@@ -290,6 +343,14 @@
                 <!-- [(ngModel)]='userData.State.value' -->
                 <label for="State" class="col-form-label">State: </label>
                 <input type="text" class="form-control  width-custom mr-custom" id="State" name='State'>
+                <div class="btn-group default-position  btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input type="radio" name="options" id="State_On">Validate</label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="State_NA" />Waiting</label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="State_Reject" />Reject</label>
+                </div>
                 <!-- [hidden]='!(userData.State.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.State.validation == 2)' -->
@@ -306,7 +367,15 @@
                     </span>
                 </label>
                 <!-- [(ngModel)]='userData.City.value' -->
-                <input type="text" class="form-control  width-custom mr-custom" id="City" name='City'>
+                <input type="text" value='{{getAttribute(attributeTypes.City)}}' class="form-control  width-custom mr-custom" id="City" name='City'>
+                <div class="btn-group default-position  btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input type="radio" name="options" id="City_On">Validate</label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="City_NA" />Waiting</label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="City_Reject" />Reject</label>
+                </div>
                 <!-- [hidden]='!(userData.City.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.City.validation == 2)' -->
@@ -323,7 +392,15 @@
                     </span>
                 </label>
                 <!-- [(ngModel)]='userData.Street.value' -->
-                <input type="text" class="form-control  width-custom mr-custom" id="Street" name='Street'>
+                <input type="text" value='{{getAttribute(attributeTypes.Street)}}' class="form-control width-custom mr-custom" id="Street" name='Street'>
+                <div class="btn-group default-position  btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input type="radio" name="options" id="Street_On">Validate</label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="Street_NA" />Waiting</label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="Street_Reject" />Reject</label>
+                </div>
                 <!-- [hidden]='!(userData.Street.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.Street.validation == 2)' -->
@@ -340,7 +417,15 @@
                     </span>
                 </label>
                 <!-- [(ngModel)]='userData.House.value' -->
-                <input type="text" class="form-control  width-custom mr-custom" id="House" name='House'>
+                <input type="text" value='{{getAttribute(attributeTypes.House)}}' class="form-control  width-custom mr-custom" id="House" name='House'>
+                <div class="btn-group default-position  btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input type="radio" name="options" id="House_On">Validate</label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="House_NA" />Waiting</label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="House_Reject" />Reject</label>
+                </div>
                 <!-- [hidden]='!(userData.House.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.House.validation == 2)' -->
@@ -352,6 +437,14 @@
                 <label for="Flat" class="col-form-label">Flat: </label>
                 <!-- [(ngModel)]='userData.Flat.value' -->
                 <input type="text" class="form-control  width-custom mr-custom" id="Flat" name='Flat'>
+                <div class="btn-group default-position  btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input type="radio" name="options" id="Flat_On">Validate</label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="Flat_NA" />Waiting</label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="Flat_Reject" />Reject</label>
+                </div>
                 <!-- [hidden]='!(userData.Flat.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.Flat.validation == 2)' -->
@@ -383,14 +476,14 @@
             </div>
         </div>
         <div class="col-md-12">
-            <button class="btn custom-btn-blue float-right mr-5">SAVE CHANGES</button>
+            <button class="btn custom-btn bg-custom float-right mr-5">SAVE CHANGES</button>
         </div>
         <div class="col-md-12">
             <hr>
         </div>
         <div class="col-md-12 mb-5">
-            <button class="btn custom-btn-blue bg-danger float-right mr-5">VERIFY USER</button>
-            <button class="btn custom-btn-blue bg-success float-right mr-5">VERIFY USER</button>
+            <button class="btn custom-btn bg-danger float-right mr-5">VERIFY USER</button>
+            <button class="btn custom-btn bg-success float-right mr-5">VERIFY USER</button>
         </div>
     </div>
 

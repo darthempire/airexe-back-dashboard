@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -7,16 +7,17 @@ import { LoaderService } from './../../../shared/core/loader.service';
 import { HttpClient } from './../../../shared/utils/HttpClient';
 
 import * as _ from 'lodash';
+import { NgModel } from '@angular/forms';
 
 @Component({
     selector: 'app-user',
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.css'],
-    providers: [UserService, HttpClient]
+    providers: [UserService, HttpClient, NgModel]
 })
 export class UserComponent implements OnInit {
 
-    private id: number;
+    id: number;
     user: any;
     attributeTypes: any;
 
