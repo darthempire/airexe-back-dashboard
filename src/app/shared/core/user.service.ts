@@ -88,4 +88,18 @@ export class UserService {
             `${environment.apiUrl}users/?skip=${skip}&take=${take}`
         );
     }
+
+    validate(code) {
+        return this.http.put(
+            `${environment.apiUrl}users/${this.authService.getUserInfo().userId}/attributes/${code}/validate`,
+            null
+        );
+    }
+
+    reject(code) {
+        return this.http.put(
+            `${environment.apiUrl}users/${this.authService.getUserInfo().userId}/attributes/${code}/reject`,
+            null
+        );
+    }
 }

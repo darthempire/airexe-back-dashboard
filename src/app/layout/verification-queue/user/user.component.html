@@ -7,7 +7,6 @@
     </ol>
 </nav>
 
-<p>{{getAttribute('1050').Value}}</p>
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -32,7 +31,7 @@
             <div class="photoBlock col-12 mt-3">
                 <div class="border mb-3">
                     <div class="passportPhoto mb-2">
-                        <img src="" alt="photo">
+                        <img src="{{passportPhoto}}" alt="photo" width="200px">
                     </div>
                     <div class="zoom col-12 mb-3">
                         <button class="btn btn-zoom float-right ml-2">+</button>
@@ -59,7 +58,8 @@
                         </span>
                     </span>
                 </label>
-                <input value='{{getAttribute(attributeTypes.FirstName)}}' type="text" class="form-control width-custom mr-custom" id="Name" name='firstname' required>
+                <input value='{{getAttribute(attributeTypes.FirstName)}}' type="text" class="form-control width-custom mr-custom" id="Name"
+                    name='firstname' required>
 
                 <!-- [hidden]='!(userData.FirstName.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
@@ -77,11 +77,12 @@
                         </span>
                     </span>
                 </label>
-                <input type="text" class="form-control width-custom mr-custom" id="Surname" name='Surname'>
+                <input value='{{getAttribute(attributeTypes.Surname)}}' type="text" class="form-control width-custom mr-custom" id="Surname"
+                    name='Surname'>
                 <div class="toggle_radio float-right">
-                    <input type="radio" class="toggle_option" id="surname_ok" name="toggle_option" value="{{getAttribute(attributeTypes.Surname)}}">
-                    <input type="radio" checked class="toggle_option" id="surname_na" name="toggle_option" value="{{getAttribute(attributeTypes.Surname)}}" checked>
-                    <input type="radio" class="toggle_option" id="surname_reject" name="toggle_option" value="{{getAttribute(attributeTypes.Surname)}}">
+                    <input type="radio" class="toggle_option" id="surname_ok" name="toggle_option" value="">
+                    <input type="radio" checked class="toggle_option" id="surname_na" name="toggle_option" value="" checked>
+                    <input type="radio" class="toggle_option" id="surname_reject" name="toggle_option" value="">
                     <label for="surname_ok" class="bg-success">
                         <p>OK</p>
                     </label>
@@ -112,7 +113,8 @@
                 <span class="badge badge-warning">Waiting verification</span>
                 <div class="toggle_radio float-right">
                     <input type="radio" class="toggle_option" id="middleName_ok" name="toggle_option" value="{{getAttribute(attributeTypes.MiddleName)}}">
-                    <input type="radio" checked class="toggle_option" id="middleName_na" name="toggle_option" value="{{getAttribute(attributeTypes.MiddleName)}}" checked>
+                    <input type="radio" checked class="toggle_option" id="middleName_na" name="toggle_option" value="{{getAttribute(attributeTypes.MiddleName)}}"
+                        checked>
                     <input type="radio" class="toggle_option" id="middleName_reject" name="toggle_option" value="{{getAttribute(attributeTypes.MiddleName)}}">
                     <label for="middleName_ok" class="bg-success">
                         <p>OK</p>
@@ -155,7 +157,7 @@
                         </span>
                     </span>
                 </label>
-                <input type="date" class="form-control  width-custom mr-custom" id="Surname" name='BirthDate'>
+                <input type="date" class="form-control  width-custom mr-custom" id="BirthDate" name='BirthDate'>
                 <!-- [hidden]='!(userData.BirthDate.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.BirthDate.validation == 2)' -->
@@ -234,7 +236,7 @@
         <div class="col-md-6 col-sm-12">
             <div class="photoBlock col-12 mt-3">
                 <div class="passportPhoto mb-2">
-                    <img src="" alt="photo" style="width: 100%; height: 100%; background: #ccc;">
+                    <img src="{{addressPhoto}}" alt="photo" style="width: 100%; height: 100%; background: #ccc;">
                 </div>
                 <label for="">Address
                     <span class="text-danger">
@@ -358,11 +360,12 @@
                 <span class="badge badge-warning">Waiting verification</span>
             </div>
         </div>
+
         <div class="col-md-6 col-sm-12 mb-5">
             <div class="photoBlock col-12 mt-3">
                 <div class="border mb-3">
                     <div class="passportPhoto mb-2">
-                        <img src="" alt="photo">
+                            <img src="{{userPhoto}}" alt="Photo not found or invalid">
                     </div>
                     <div class="zoom col-12 mb-3">
                         <button class="btn btn-zoom float-right ml-2">+</button>
