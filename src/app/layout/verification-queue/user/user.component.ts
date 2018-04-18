@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -7,7 +7,7 @@ import { LoaderService } from './../../../shared/core/loader.service';
 import { HttpClient } from './../../../shared/utils/HttpClient';
 
 import * as _ from 'lodash';
-import { NgModel } from '@angular/forms';
+import { NgModel, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'app-user',
@@ -16,12 +16,14 @@ import { NgModel } from '@angular/forms';
     providers: [UserService, HttpClient, NgModel]
 })
 export class UserComponent implements OnInit {
-
+    surname: string;
     private id: number;
     user: any;
     attributeTypes: any;
 
     private routeSubscription: Subscription;
+
+    form: FormGroup;
 
     constructor(private route: ActivatedRoute, private userService: UserService, private loaderService: LoaderService) {
         this.routeSubscription = route.params.subscribe(params => this.id = params['id']);
@@ -31,6 +33,25 @@ export class UserComponent implements OnInit {
     ngOnInit() {
         this.getUser();
         this.getSourse();
+        this.surname = this.getAttribute(this.attributeTypes.Surname);
+        // this.form = new FormGroup({
+        //     firstname: new FormControl(this.getAttribute(this.attributeTypes.FirstName)),
+        //     // surname: new FormControl(''),
+        //     // // middleName: new FormControl(''),
+        //     // gender: new FormControl(''),
+        //     // birthDate: new FormControl(''),
+        //     // passportType: new FormControl(''),
+        //     // passportNumber: new FormControl(''),
+        //     // passportIssueDate: new FormControl(''),
+        //     // // passportExpirationDate: new FormControl(''),
+        //     // country: new FormControl(''),
+        //     // zip: new FormControl(''),
+        //     // // state: new FormControl(''),
+        //     // city: new FormControl(''),
+        //     // street: new FormControl(''),
+        //     // house: new FormControl('')
+        //     // flat: new FormControl('')
+        // });
     }
 
     getUser() {
@@ -71,6 +92,10 @@ export class UserComponent implements OnInit {
             return _.find(this.user.attrs, {code: type}).value;
         }
         return '';
+    }
+
+    checkValidation(asd) {
+        console.log((<HTMLInputElement>asd.target).innerText);
     }
 }
 

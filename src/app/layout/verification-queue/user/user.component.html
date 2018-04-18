@@ -28,6 +28,7 @@
                 <span>xxx</span>
             </label>
         </div>
+        <!-- <form> -->
         <div class="col-md-6 col-sm-12">
             <div class="photoBlock col-12 mt-3">
                 <div class="border mb-3">
@@ -66,7 +67,7 @@
                         </span>
                     </span>
                 </label>
-                <input value='{{getAttribute(attributeTypes.FirstName)}}' type="text" class="form-control width-custom mr-custom" id="Name" name='firstname' required>
+                <input type="text" class="form-control width-custom mr-custom" id="Name" name='firstname' required #firstname>
                 <!-- [hidden]='!(userData.FirstName.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.FirstName.validation =    = 2)' -->
@@ -84,7 +85,7 @@
                         </span>
                     </span>
                 </label>
-                <input type="text" value='{{getAttribute(attributeTypes.Surname)}}' class="form-control width-custom mr-custom" id="Surname" name='Surname'>
+                <input type="text" [(ngModel)]="surname" class="form-control width-custom mr-custom" id="Surname" name='Surname'>
                 <div class="btn-group default-position  btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-success">
                         <input type="radio" name="options" id="Surname_On">Validate</label>
@@ -280,6 +281,7 @@
                 <span class="badge badge-warning">Waiting verification</span>
             </div>
         </div>
+        <!-- </form> -->
         <div class="col-md-6 col-sm-12">
             <div class="photoBlock col-12 mt-3">
                 <div class="passportPhoto mb-2">
@@ -476,7 +478,7 @@
             </div>
         </div>
         <div class="col-md-12">
-            <button class="btn custom-btn bg-custom float-right mr-5">SAVE CHANGES</button>
+            <button class="btn custom-btn bg-custom float-right mr-5" (click)="checkValidation(firstname)">SAVE CHANGES</button>
         </div>
         <div class="col-md-12">
             <hr>

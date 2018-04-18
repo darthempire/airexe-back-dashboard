@@ -15,6 +15,7 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { LoaderService } from './shared/core/loader.service';
 import { NotificationService } from './shared/core/notification.service';
 import { AuthService } from './shared/core/auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,9 +25,11 @@ import { AuthService } from './shared/core/auth.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
-  providers: [AuthGuard, LoaderService, NotificationService, AuthService],
+  providers: [AuthGuard, LoaderService, NotificationService, AuthService, ReactiveFormsModule],
+  exports: [ReactiveFormsModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
