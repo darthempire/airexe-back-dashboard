@@ -36,7 +36,7 @@ export class UserComponent implements OnInit {
 
     ngOnInit() {
         this.getUser();
-        this.getSourse();
+        this.getSourses();
         this.surname = this.getAttribute(this.attributeTypes.Surname);
         // this.form = new FormGroup({
         //     firstname: new FormControl(this.getAttribute(this.attributeTypes.FirstName)),
