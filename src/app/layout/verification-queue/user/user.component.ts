@@ -21,6 +21,10 @@ export class UserComponent implements OnInit {
     user: any;
     attributeTypes: any;
 
+    passportPhoto: any;
+    addressPhoto: any;
+    userPhoto: any;
+
     private routeSubscription: Subscription;
 
     form: FormGroup;
@@ -61,29 +65,43 @@ export class UserComponent implements OnInit {
                 this.loaderService.display(false);
                 this.user = JSON.parse(data['_body']);
                 console.log(this.user);
+                this.getSourses();
             })
             .catch(err => {
                 this.loaderService.display(false);
                 console.log(err);
             });
     }
-
-    getSourse() {
-        this.userService.getSourseBlob('44038984-09b1-49cb-aba2-c58c5778b088')
+    getSourses() {
+        this.getSourse(this.attributeTypes.PassportPhoto);
+        this.getSourse(this.attributeTypes.UserPhoto);
+        this.getSourse(this.attributeTypes.AddressPhoto);
+    }
+    getSourse(type) {
+        this.userService.getSourseBlob(this.getAttribute(type))
         .then(data => {
             const blob = new Blob([data['_body']], { type: 'image/jpg' });
-            this.blobToBase64(blob);
+            this.blobToBase64(blob, type);
         })
         .catch(err => {
             console.log(err);
         });
     }
 
-    private blobToBase64(blob) {
+    private blobToBase64(blob, type) {
         const reader = new FileReader();
         reader.readAsDataURL(blob);
-        reader.onloadend = function() {
-            const base64data = reader.result;
+        reader.onloadend = (e) => {
+            if (type === this.attributeTypes.PassportPhoto) {
+                this.passportPhoto = reader.result;
+            }
+            if (type === this.attributeTypes.UserPhoto) {
+                this.userPhoto = reader.result;
+            }
+            if (type === this.attributeTypes.AddressPhoto) {
+                this.addressPhoto = reader.result;
+                console.log(this.addressPhoto);
+            }
         };
     }
 
