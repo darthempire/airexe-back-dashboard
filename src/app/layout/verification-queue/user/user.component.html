@@ -61,21 +61,6 @@
                 </label>
                 <input value='{{getAttribute(attributeTypes.FirstName)}}' type="text" class="form-control width-custom mr-custom" id="Name" name='firstname' required>
 
-                <div class="toggle_radio float-right">
-                    <input type="radio" class="toggle_option" id="first_toggle1" name="toggle_option" value="1">
-                    <input type="radio" checked class="toggle_option" id="second_toggle1" name="toggle_option" value="2" checked>
-                    <input type="radio" class="toggle_option" id="third_toggle1" name="toggle_option" value="3">
-                    <label for="first_toggle1" class="bg-success">
-                        <p>OK</p>
-                    </label>
-                    <label for="second_toggle1">
-                        <p> </p>
-                    </label>
-                    <label for="third_toggle1" class="bg-danger">
-                        <p>Reject</p>
-                    </label>
-                    <div class="toggle_option_slider"></div>
-                </div>
                 <!-- [hidden]='!(userData.FirstName.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.FirstName.validation =    = 2)' -->
@@ -94,16 +79,16 @@
                 </label>
                 <input type="text" class="form-control width-custom mr-custom" id="Surname" name='Surname'>
                 <div class="toggle_radio float-right">
-                    <input type="radio" class="toggle_option" id="first_toggle" name="toggle_option" value="1">
-                    <input type="radio" checked class="toggle_option" id="second_toggle" name="toggle_option" value="2" checked>
-                    <input type="radio" class="toggle_option" id="third_toggle" name="toggle_option" value="3">
-                    <label for="first_toggle" class="bg-success">
+                    <input type="radio" class="toggle_option" id="surname_ok" name="toggle_option" value="{{getAttribute(attributeTypes.Surname)}}">
+                    <input type="radio" checked class="toggle_option" id="surname_na" name="toggle_option" value="{{getAttribute(attributeTypes.Surname)}}" checked>
+                    <input type="radio" class="toggle_option" id="surname_reject" name="toggle_option" value="{{getAttribute(attributeTypes.Surname)}}">
+                    <label for="surname_ok" class="bg-success">
                         <p>OK</p>
                     </label>
-                    <label for="second_toggle">
+                    <label for="surname_na">
                         <p> </p>
                     </label>
-                    <label for="third_toggle" class="bg-danger">
+                    <label for="surname_reject" class="bg-danger">
                         <p>Reject</p>
                     </label>
                     <div class="toggle_option_slider"></div>
@@ -125,6 +110,21 @@
                 <span class="badge badge-danger">Rejected</span>
                 <!-- [hidden]='!(userData.MiddleName.validation == 0)' -->
                 <span class="badge badge-warning">Waiting verification</span>
+                <div class="toggle_radio float-right">
+                    <input type="radio" class="toggle_option" id="middleName_ok" name="toggle_option" value="{{getAttribute(attributeTypes.MiddleName)}}">
+                    <input type="radio" checked class="toggle_option" id="middleName_na" name="toggle_option" value="{{getAttribute(attributeTypes.MiddleName)}}" checked>
+                    <input type="radio" class="toggle_option" id="middleName_reject" name="toggle_option" value="{{getAttribute(attributeTypes.MiddleName)}}">
+                    <label for="middleName_ok" class="bg-success">
+                        <p>OK</p>
+                    </label>
+                    <label for="middleName_na">
+                        <p> </p>
+                    </label>
+                    <label for="middleName_reject" class="bg-danger">
+                        <p>Reject</p>
+                    </label>
+                    <div class="toggle_option_slider"></div>
+                </div>
             </div>
             <div class="form-group">
                 <!-- [(ngModel)]='userData.Gender.value' -->

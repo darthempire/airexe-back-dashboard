@@ -107,17 +107,38 @@
     border: 1px solid #FFF;
 }
 
-#first_toggle:checked~.toggle_option_slider {
+
+/* /////////Surname */
+
+#surname_ok:checked~.toggle_option_slider {
     background: #e9e9e9;
     left: 4px;
 }
 
-#second_toggle:checked~.toggle_option_slider {
+#surname_na:checked~.toggle_option_slider {
     background: #e9e9e9;
     left: 50px;
 }
 
-#third_toggle:checked~.toggle_option_slider {
+#surname_reject:checked~.toggle_option_slider {
+    background: #e9e9e9;
+    left: 94px;
+}
+
+
+/* /////////middleName */
+
+#middleName_ok:checked~.toggle_option_slider {
+    background: #e9e9e9;
+    left: 4px;
+}
+
+#middleName_na:checked~.toggle_option_slider {
+    background: #e9e9e9;
+    left: 50px;
+}
+
+#middleName_reject:checked~.toggle_option_slider {
     background: #e9e9e9;
     left: 94px;
 }
