@@ -64,7 +64,10 @@ export class UserComponent implements OnInit {
     }
 
     getAttribute(type) {
-        return _.find(this.user.attrs, {code: type});
+        if (this.user !== undefined) {
+            return _.find(this.user.attrs, {code: type}).value;
+        }
+        return '';
     }
 }
 
