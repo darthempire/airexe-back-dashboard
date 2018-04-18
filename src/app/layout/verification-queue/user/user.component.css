@@ -1,5 +1,5 @@
 .width-custom {
-    width: 80% !important;
+    width: 65% !important;
 }
 
 .mr-custom {
@@ -13,7 +13,11 @@
     min-width: 100%;
 }
 
-.custom-btn-blue {
+.bg-custom {
+    background: #2b4a91;
+}
+
+.custom-btn {
     background: #2b4a91;
     border-radius: 0;
     position: relative;
@@ -107,38 +111,34 @@
     border: 1px solid #FFF;
 }
 
-
-/* /////////Surname */
-
-#surname_ok:checked~.toggle_option_slider {
-    background: #e9e9e9;
-    left: 4px;
+.default-position {
+    float: right;
+    top: -38px;
+    margin: 1px;
 }
 
-#surname_na:checked~.toggle_option_slider {
-    background: #e9e9e9;
-    left: 50px;
+element.style {}
+
+.btn-group>.btn-group:not(:last-child)>.btn,
+.btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
-#surname_reject:checked~.toggle_option_slider {
-    background: #e9e9e9;
-    left: 94px;
+.btn-success:not(:disabled):not(.disabled).active {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, .5);
+}
+
+.btn-warning:not(:disabled):not(.disabled).active {
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, .5);
+}
+
+.btn-danger:not(:disabled):not(.disabled).active {
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, .5);
 }
 
 
-/* /////////middleName */
-
-#middleName_ok:checked~.toggle_option_slider {
-    background: #e9e9e9;
-    left: 4px;
-}
-
-#middleName_na:checked~.toggle_option_slider {
-    background: #e9e9e9;
-    left: 50px;
-}
-
-#middleName_reject:checked~.toggle_option_slider {
-    background: #e9e9e9;
-    left: 94px;
-}
+/*
+label.btn:checked {
+    background-color: #fff;
+} */
