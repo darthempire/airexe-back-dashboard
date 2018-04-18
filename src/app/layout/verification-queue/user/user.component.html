@@ -60,6 +60,22 @@
                     </span>
                 </label>
                 <input value='{{getAttribute(attributeTypes.FirstName)}}' type="text" class="form-control width-custom mr-custom" id="Name" name='firstname' required>
+
+                <div class="toggle_radio float-right">
+                    <input type="radio" class="toggle_option" id="first_toggle1" name="toggle_option" value="1">
+                    <input type="radio" checked class="toggle_option" id="second_toggle1" name="toggle_option" value="2" checked>
+                    <input type="radio" class="toggle_option" id="third_toggle1" name="toggle_option" value="3">
+                    <label for="first_toggle1" class="bg-success">
+                        <p>OK</p>
+                    </label>
+                    <label for="second_toggle1">
+                        <p> </p>
+                    </label>
+                    <label for="third_toggle1" class="bg-danger">
+                        <p>Reject</p>
+                    </label>
+                    <div class="toggle_option_slider"></div>
+                </div>
                 <!-- [hidden]='!(userData.FirstName.validation == 1)' -->
                 <span class="badge badge-success">Verified</span>
                 <!-- [hidden]='!(userData.FirstName.validation =    = 2)' -->
