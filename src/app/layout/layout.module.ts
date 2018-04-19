@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {ImageZoomModule} from 'angular2-image-zoom';
 
 import { LayoutComponent } from './layout.component';
 import { LayoutRoutingModule } from './layout-routing.module';
@@ -13,7 +14,8 @@ import { UserComponent } from './verification-queue/user/user.component';
     CommonModule,
     LayoutRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ImageZoomModule
   ],
   declarations: [LayoutComponent, NavbarComponent, SidebarComponent, UserComponent]
 })

@@ -69,11 +69,8 @@
                     </span>
                 </label>
                 <input value='{{getAttribute(attributeTypes.FirstName)}}' type="text" class="form-control width-custom mr-custom" id="firstname" name='firstname' required #firstname>
-                <!--  -->
                 <span [hidden]='!(getAttributeValidation(attributeTypes.FirstName) == 1)' class="badge badge-success">Verified</span>
-                <!-- [hidden]='!(userData.FirstName.validation =    = 2)' -->
                 <span [hidden]='!(getAttributeValidation(attributeTypes.FirstName) == 2)' class="badge badge-danger">Rejected</span>
-                <!-- [hidden]='!(userData.FirstName.validation == 0)' -->
                 <span [hidden]='!(getAttributeValidation(attributeTypes.FirstName) == 0)' class="badge badge-warning">Waiting verification</span>
 
                 <div [hidden]='getAttributeValidation(attributeTypes.FirstName) == 1' class="btn-group default-position " data-toggle="buttons">
@@ -292,7 +289,7 @@
         <div class="col-md-6 col-sm-12">
             <div class="photoBlock col-12 mt-3">
                 <div class="passportPhoto mb-2">
-                    <img src="{{addressPhoto}}" alt="photo" style="width: 100%; height: 100%; background: #ccc;">
+                    <img  [imageZoom]="addressPhoto" src="{{addressPhoto}}" alt="photo" style="width: 100%; height: 100%; background: #ccc;">
                 </div>
                 <label for="">Address
                     <span class="text-danger">
@@ -492,5 +489,10 @@
             <button class="btn custom-btn bg-success float-right mr-5">VERIFY USER</button>
         </div>
     </div>
-
+    <div class="alert alert-danger" [hidden]='!badSend' role="alert">
+        Something went wrong! Try once again later.
+    </div>
+    <div class="alert alert-success" [hidden]='!goodSend' role="alert">
+        Ok!
+    </div>
 </div>

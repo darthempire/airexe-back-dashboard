@@ -20,6 +20,8 @@ import { CountryCodes } from './country-codes';
 export class UserComponent implements OnInit {
     surname = '11232';
     private id: number;
+    badSend = false;
+    goodSend = false;
     user: any;
     attributeTypes: any;
     countryCodes: any = CountryCodes;
@@ -67,8 +69,6 @@ export class UserComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.requiredFields);
-
         this.getUser();
         this.getSourses();
         this.surname = this.getAttribute(this.attributeTypes.Surname);
@@ -160,7 +160,7 @@ export class UserComponent implements OnInit {
                 isAllSelected = true;
             }
         });
-        console.log(isAllSelected);
+        return isAllSelected;
     }
 
     changeStatus(type, status) {
@@ -172,7 +172,34 @@ export class UserComponent implements OnInit {
     }
 
     saveChanges() {
-        this.checkRequired();
+        this.badSend = false;
+        this.goodSend = true;
+        if (this.checkRequired()) {
+        }
+    }
+
+    verifyUser() {
+        this.badSend = false;
+        this.goodSend = true;
+        this.userService.verifyUser()
+            .then(data => {
+                this.goodSend = true;
+            })
+            .catch(err => {
+                this.badSend = true;
+            });
+    }
+
+    rejectUser() {
+        this.badSend = false;
+        this.goodSend = true;
+        this.userService.rejectUser()
+            .then(data => {
+                this.goodSend = true;
+            })
+            .catch(err => {
+                this.badSend = true;
+            });
     }
 }
 

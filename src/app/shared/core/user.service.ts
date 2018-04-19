@@ -102,4 +102,32 @@ export class UserService {
             null
         );
     }
+
+    validateSource(id) {
+        return this.http.put(
+            `${environment.apiUrl}sources/${id}/validate`,
+            null
+        );
+    }
+
+    rejectSource(id) {
+        return this.http.put(
+            `${environment.apiUrl}sources/${id}/validate`,
+            null
+        );
+    }
+
+    verifyUser() {
+        return this.http.put(
+            `${environment.apiUrl}users/${this.authService.getUserInfo().userId}/verify`,
+            null
+        );
+    }
+
+    rejectUser() {
+        return this.http.put(
+            `${environment.apiUrl}users/${this.authService.getUserInfo().userId}/reject`,
+            null
+        );
+    }
 }
