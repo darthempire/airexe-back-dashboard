@@ -30,8 +30,8 @@ export class UserComponent implements OnInit {
     addressPhoto: any;
     userPhoto: any;
 
-
     requiredFields: any = [];
+    changedFields: any = [];
     requiredFieldCodes: any = [
         AttributeTypes.FirstName,
         AttributeTypes.Surname,
@@ -130,7 +130,6 @@ export class UserComponent implements OnInit {
         return '';
     }
 
-
     getAttributeValidation(type) {
         if (this.user !== undefined) {
             return _.find(this.user.attrs, { code: type }).validation;
@@ -139,16 +138,22 @@ export class UserComponent implements OnInit {
     }
 
     getCountryName(countryCode) {
-        const result = _.find(this.countryCodes, {'alpha-2':  countryCode.toString().toUpperCase()});
+        const result = _.find(this.countryCodes, {
+            'alpha-2': countryCode.toString().toUpperCase()
+        });
         if (result !== undefined) {
             return result.name;
-        } else { return ''; }
+        } else {
+            return '';
+        }
     }
 
     refillRequired() {
         this.requiredFields = [];
         this.requiredFieldCodes.forEach(element => {
-            this.requiredFields.push(_.find(this.user.attrs, { code: element }));
+            this.requiredFields.push(
+                _.find(this.user.attrs, { code: element })
+            );
         });
     }
 
@@ -156,7 +161,8 @@ export class UserComponent implements OnInit {
         this.refillRequired();
         let isAllSelected = false;
         this.requiredFields.forEach(element => {
-            if (element.status === 0) { // 0 - waiting
+            if (element.status === 0) {
+                // 0 - waiting
                 isAllSelected = true;
             }
         });
@@ -167,21 +173,64 @@ export class UserComponent implements OnInit {
         this.user.attrs.forEach(element => {
             if (element.code === type) {
                 element.validation = status;
+                this.changedFields.push(
+                    _.find(this.user.attrs, { code: type })
+                );
             }
         });
     }
 
     saveChanges() {
         this.badSend = false;
-        this.goodSend = true;
+        this.goodSend = false;
+        console.log(this.changedFields);
         if (this.checkRequired()) {
+            const images = [];
+            images.push(
+                _.find(this.changedFields, {
+                    code: AttributeTypes.PassportPhoto
+                })
+            );
+            images.push(
+                _.find(this.changedFields, { code: AttributeTypes.UserPhoto })
+            );
+            images.push(
+                _.find(this.changedFields, {
+                    code: AttributeTypes.AddressPhoto
+                })
+            );
+
+            _.remove(this.changedFields, {
+                code: AttributeTypes.PassportPhoto
+            });
+            _.remove(this.changedFields, { code: AttributeTypes.UserPhoto });
+            _.remove(this.changedFields, { code: AttributeTypes.AddressPhoto });
+
+            images.forEach(element => {
+                if (element.validation === this.statuses.Verified) {
+                    this.validateSource(element.value);
+                }
+                if (element.validation === this.statuses.Rejected) {
+                    this.rejectSource(element.value);
+                }
+            });
+
+            this.changedFields.forEach(element => {
+                if (element.validation === this.statuses.Verified) {
+                    this.validate(element.code);
+                }
+                if (element.validation === this.statuses.Rejected) {
+                    this.reject(element.code);
+                }
+            });
         }
     }
 
     verifyUser() {
         this.badSend = false;
         this.goodSend = true;
-        this.userService.verifyUser()
+        this.userService
+            .verifyUser()
             .then(data => {
                 this.goodSend = true;
             })
@@ -193,13 +242,38 @@ export class UserComponent implements OnInit {
     rejectUser() {
         this.badSend = false;
         this.goodSend = true;
-        this.userService.rejectUser()
+        this.userService
+            .rejectUser()
             .then(data => {
                 this.goodSend = true;
             })
             .catch(err => {
                 this.badSend = true;
             });
+    }
+
+    validate(code) {
+        this.userService.validate(code).catch(err => {
+            this.badSend = true;
+        });
+    }
+
+    reject(code) {
+        this.userService.reject(code).catch(err => {
+            this.badSend = true;
+        });
+    }
+
+    validateSource(id) {
+        this.userService.validateSource(id).catch(err => {
+            this.badSend = true;
+        });
+    }
+
+    rejectSource(id) {
+        this.userService.rejectSource(id).catch(err => {
+            this.badSend = true;
+        });
     }
 }
 
@@ -225,5 +299,3 @@ enum AttributeTypes {
     AddressPhoto = '1071',
     UserPhoto = '1072'
 }
-
-

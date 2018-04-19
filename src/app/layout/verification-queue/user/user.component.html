@@ -74,11 +74,11 @@
                 <span [hidden]='!(getAttributeValidation(attributeTypes.FirstName) == 0)' class="badge badge-warning">Waiting verification</span>
 
                 <div [hidden]='getAttributeValidation(attributeTypes.FirstName) == 1' class="btn-group default-position " data-toggle="buttons">
-                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.MiddleName, statuses.Verified)">
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.FirstName, statuses.Verified)">
                         <input type="radio" name="options" id="MiddleName_On" >Validatd</label>
                     <label class="btn btn-warning">
                         <input type="radio" name="options" id="MiddleName_NA" checked disabled/>Waiting</label>
-                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.MiddleName, statuses.Reject)">
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.FirstName, statuses.Reject)">
                         <input type="radio" name="options" id="MiddleName_Reject"  />Reject</label>
                 </div>
 
