@@ -8,60 +8,76 @@ import { LoaderService } from './../../../shared/core/loader.service';
 import { HttpClient } from './../../../shared/utils/HttpClient';
 
 import * as _ from 'lodash';
-import { NgModel, FormGroup, FormControl } from '@angular/forms';
+
+import { CountryCodes } from './country-codes';
 
 @Component({
     selector: 'app-user',
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.css'],
-    providers: [UserService, HttpClient, NgModel]
+    providers: [UserService, HttpClient]
 })
 export class UserComponent implements OnInit {
     surname = '11232';
     private id: number;
     user: any;
     attributeTypes: any;
+    countryCodes: any = CountryCodes;
 
     passportPhoto: any;
     addressPhoto: any;
     userPhoto: any;
 
+
+    requiredFields: any = [];
+    requiredFieldCodes: any = [
+        AttributeTypes.FirstName,
+        AttributeTypes.Surname,
+        AttributeTypes.Gender,
+        AttributeTypes.BirthDate,
+        AttributeTypes.PassportType,
+        AttributeTypes.PassportNumber,
+        AttributeTypes.PassportIssueDate,
+        AttributeTypes.CountryCode,
+        AttributeTypes.City,
+        AttributeTypes.Street,
+        AttributeTypes.House,
+        AttributeTypes.PassportPhoto
+    ];
+
     private routeSubscription: Subscription;
 
-    form: FormGroup;
+    statuses: any = {
+        Waiting: 0,
+        Verified: 1,
+        Rejected: 2
+    };
 
-    constructor(private route: ActivatedRoute, private userService: UserService, private loaderService: LoaderService) {
-        this.routeSubscription = route.params.subscribe(params => this.id = params['id']);
+    constructor(
+        private route: ActivatedRoute,
+        private userService: UserService,
+        private loaderService: LoaderService
+    ) {
+        this.routeSubscription = route.params.subscribe(
+            params => (this.id = params['id'])
+        );
         this.attributeTypes = AttributeTypes;
+
+        console.log(this.attributeTypes);
     }
 
     ngOnInit() {
+        console.log(this.requiredFields);
+
         this.getUser();
         this.getSourses();
         this.surname = this.getAttribute(this.attributeTypes.Surname);
-        // this.form = new FormGroup({
-        //     firstname: new FormControl(this.getAttribute(this.attributeTypes.FirstName)),
-        //     // surname: new FormControl(''),
-        //     // // middleName: new FormControl(''),
-        //     // gender: new FormControl(''),
-        //     // birthDate: new FormControl(''),
-        //     // passportType: new FormControl(''),
-        //     // passportNumber: new FormControl(''),
-        //     // passportIssueDate: new FormControl(''),
-        //     // // passportExpirationDate: new FormControl(''),
-        //     // country: new FormControl(''),
-        //     // zip: new FormControl(''),
-        //     // // state: new FormControl(''),
-        //     // city: new FormControl(''),
-        //     // street: new FormControl(''),
-        //     // house: new FormControl('')
-        //     // flat: new FormControl('')
-        // });
     }
 
     getUser() {
         this.loaderService.display(true);
-        this.userService.getUserById(this.id)
+        this.userService
+            .getUserById(this.id)
             .then(data => {
                 this.loaderService.display(false);
                 this.user = JSON.parse(data['_body']);
@@ -78,21 +94,23 @@ export class UserComponent implements OnInit {
         this.getSourse(this.attributeTypes.UserPhoto);
         this.getSourse(this.attributeTypes.AddressPhoto);
     }
+
     getSourse(type) {
-        this.userService.getSourseBlob(this.getAttribute(type))
-        .then(data => {
-            const blob = new Blob([data['_body']], { type: 'image/jpg' });
-            this.blobToBase64(blob, type);
-        })
-        .catch(err => {
-            console.log(err);
-        });
+        this.userService
+            .getSourseBlob(this.getAttribute(type))
+            .then(data => {
+                const blob = new Blob([data['_body']], { type: 'image/jpg' });
+                this.blobToBase64(blob, type);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     private blobToBase64(blob, type) {
         const reader = new FileReader();
         reader.readAsDataURL(blob);
-        reader.onloadend = (e) => {
+        reader.onloadend = e => {
             if (type === this.attributeTypes.PassportPhoto) {
                 this.passportPhoto = reader.result;
             }
@@ -107,13 +125,54 @@ export class UserComponent implements OnInit {
 
     getAttribute(type) {
         if (this.user !== undefined) {
-            return _.find(this.user.attrs, {code: type}).value;
+            return _.find(this.user.attrs, { code: type }).value;
         }
         return '';
     }
 
-    checkValidation(asd) {
-        console.log((<HTMLInputElement>asd.target).innerText);
+
+    getAttributeValidation(type) {
+        if (this.user !== undefined) {
+            return _.find(this.user.attrs, { code: type }).validation;
+        }
+        return '';
+    }
+
+    getCountryName(countryCode) {
+        const result = _.find(this.countryCodes, {'alpha-2':  countryCode.toString().toUpperCase()});
+        if (result !== undefined) {
+            return result.name;
+        } else { return ''; }
+    }
+
+    refillRequired() {
+        this.requiredFields = [];
+        this.requiredFieldCodes.forEach(element => {
+            this.requiredFields.push(_.find(this.user.attrs, { code: element }));
+        });
+    }
+
+    checkRequired() {
+        this.refillRequired();
+        let isAllSelected = false;
+        this.requiredFields.forEach(element => {
+            if (element.status === 0) { // 0 - waiting
+                isAllSelected = true;
+            }
+        });
+        console.log(isAllSelected);
+    }
+
+    changeStatus(type, status) {
+        this.user.attrs.forEach(element => {
+            if (element.code === type) {
+                element.validation = status;
+            }
+        });
+    }
+
+    saveChanges() {
+        this.checkRequired();
     }
 }
 
@@ -139,3 +198,5 @@ enum AttributeTypes {
     AddressPhoto = '1071',
     UserPhoto = '1072'
 }
+
+
