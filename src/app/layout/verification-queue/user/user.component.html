@@ -291,7 +291,14 @@
                     </span>
                 </label>
                 <input value="{{getCountryName(getAttribute(attributeTypes.CountryCode))}}" class="form-control  width-custom mr-custom" id="CountryCode" name='CountryCode'>
-
+                <div [hidden]='getAttributeValidation(attributeTypes.CountryCode) == 1' class="btn-group default-position  " data-toggle="buttons">
+                        <label class="btn btn-success">
+                            <input type="radio" name="PassportExpirationDate" id="PassportExpirationDate_On">Validate</label>
+                        <label class="btn btn-warning">
+                            <input type="radio" name="PassportExpirationDate" id="PassportExpirationDate_NA" />Waiting</label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="PassportExpirationDate" id="PassportExpirationDate_Reject" />Reject</label>
+                    </div>
                 <span [hidden]='!(getAttributeValidation(attributeTypes.CountryCode) == 1)' class="badge badge-success">Verified</span>
                 <span [hidden]='!(getAttributeValidation(attributeTypes.CountryCode) == 2)' class="badge badge-danger">Rejected</span>
                 <span [hidden]='!(getAttributeValidation(attributeTypes.CountryCode) == 0)' class="badge badge-warning">Waiting verification</span>
