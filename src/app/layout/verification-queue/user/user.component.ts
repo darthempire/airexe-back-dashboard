@@ -91,6 +91,7 @@ export class UserComponent implements OnInit {
                 this.UpdateDate = this.user.updateDate;
                 this.UserStatus = this.user.status;
 
+
                 console.log(this.user);
                 this.getSourses();
             })
@@ -308,7 +309,7 @@ enum AttributeTypes {
     PassportPhoto = '1070',
     AddressPhoto = '1071',
     UserPhoto = '1072',
-
+    //
     Selfie = '1100',
     Address = '1101',
     Passport = '1102'
