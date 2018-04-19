@@ -182,12 +182,12 @@
                     <option value="4">International ID</option>
                 </select>
                 <div [hidden]='getAttributeValidation(attributeTypes.PassportType) == 1' class="btn-group default-position  " data-toggle="buttons">
-                    <label class="btn btn-success">
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.PassportType, statuses.Verified)">
                         <input type="radio" name="PassportType" id="PassportType_On">Validate</label>
                     <label class="btn btn-warning">
                         <input type="radio" name="PassportType" id="PassportType_NA" />Waiting</label>
-                    <label class="btn btn-danger">
-                        <input type="radio" name="PassportType" id="PassportType_Reject" />Reject</label>
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.PassportType, statuses.Rejected)">
+                        <input type="radio" name="PassportType" id="PassportType_Reject"/>Reject</label>
                 </div>
 
                 <span [hidden]='!(getAttributeValidation(attributeTypes.PassportType) == 1)' class="badge badge-success">Verified</span>
@@ -205,11 +205,11 @@
                 </label>
                 <input type="text" value='{{getAttribute(attributeTypes.PassportNumber)}}' class="form-control  width-custom mr-custom" id="PassportNumber" name='PassportNumber'>
                 <div [hidden]='getAttributeValidation(attributeTypes.PassportNumber) == 1' class="btn-group default-position  " data-toggle="buttons">
-                    <label class="btn btn-success">
-                        <input type="radio" name="PassportNumber" id="PassportNumber_On">Validate</label>
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.PassportNumber, statuses.Verified)">
+                        <input type="radio" name="PassportNumber" id="PassportNumber_On" >Validate</label>
                     <label class="btn btn-warning">
                         <input type="radio" name="PassportNumber" id="PassportNumber_NA" />Waiting</label>
-                    <label class="btn btn-danger">
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.PassportNumber, statuses.Rejected)">
                         <input type="radio" name="PassportNumber" id="PassportNumber_Reject" />Reject</label>
                 </div>
 
@@ -227,12 +227,12 @@
                     </span>
                 </label>
                 <input type="text" value='{{getAttribute(attributeTypes.PassportIssueDate)}}' class="form-control  width-custom mr-custom" id="PassportIssueDate" name='PassportIssueDate'>
-                <div [hidden]='getAttributeValidation(attributeTypes.PassportIssueDate) == 1' class="btn-group default-position  " data-toggle="buttons">
-                    <label class="btn btn-success">
-                        <input type="radio" name="PassportIssueDate" id="PassportIssueDate_On">Validate</label>
+                <div [hidden]='getAttributeValidation(attributeTypes.PassportIssueDate) == 1' class="btn-group default-position" data-toggle="buttons">
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.PassportIssueDate, statuses.Verified)">
+                        <input type="radio" name="PassportIssueDate" id="PassportIssueDate_On" >Validate</label>
                     <label class="btn btn-warning">
                         <input type="radio" name="PassportIssueDate" id="PassportIssueDate_NA" />Waiting</label>
-                    <label class="btn btn-danger">
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.PassportIssueDate, statuses.Rejected)">
                         <input type="radio" name="PassportIssueDate" id="PassportIssueDate_Reject" />Reject</label>
                 </div>
 
@@ -245,12 +245,12 @@
                 <label for="PassportExpirationDate" class="col-form-label">Passport/ID Expiration Date: </label>
                 <input value='{{getAttribute(attributeTypes.PassportExpirationDate)}}' type="text" class="form-control  width-custom mr-custom" id="PassportExpirationDate" name='PassportExpirationDate'>
                 <div [hidden]='getAttributeValidation(attributeTypes.PassportExpirationDate) == 1' class="btn-group default-position  " data-toggle="buttons">
-                    <label class="btn btn-success">
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.PassportExpirationDate, statuses.Verified)">
                         <input type="radio" name="PassportExpirationDate" id="PassportExpirationDate_On">Validate</label>
                     <label class="btn btn-warning">
                         <input type="radio" name="PassportExpirationDate" id="PassportExpirationDate_NA" />Waiting</label>
-                    <label class="btn btn-danger">
-                        <input type="radio" name="PassportExpirationDate" id="PassportExpirationDate_Reject" />Reject</label>
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.PassportExpirationDate, statuses.Rejected)">
+                        <input type="radio" name="PassportExpirationDate" id="PassportExpirationDate_Reject">Reject</label>
                 </div>
 
                 <span [hidden]='!(getAttributeValidation(attributeTypes.PassportExpirationDate) == 1)' class="badge badge-success">Verified</span>
@@ -315,12 +315,12 @@
                 <label for="State" class="col-form-label">State: </label>
                 <input value='{{getAttribute(attributeTypes.State)}}' type="text" class="form-control  width-custom mr-custom" id="State" name='State'>
                 <div [hidden]='getAttributeValidation(attributeTypes.State) == 1' class="btn-group default-position  " data-toggle="buttons">
-                    <label class="btn btn-success">
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.State, statuses.Verified)">
                         <input type="radio" name="State" id="State_On">Validate</label>
                     <label class="btn btn-warning">
                         <input type="radio" name="State" id="State_NA" />Waiting</label>
-                    <label class="btn btn-danger">
-                        <input type="radio" name="State" id="State_Reject" />Reject</label>
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.State, statuses.Rejected)">
+                        <input type="radio" name="State" id="State_Reject"/>Reject</label>
                 </div>
 
                 <span [hidden]='!(getAttributeValidation(attributeTypes.State) == 1)' class="badge badge-success">Verified</span>
@@ -338,12 +338,12 @@
                 </label>
                 <input type="text" value='{{getAttribute(attributeTypes.City)}}' class="form-control  width-custom mr-custom" id="City" name='City'>
                 <div [hidden]='getAttributeValidation(attributeTypes.City) == 1' class="btn-group default-position  " data-toggle="buttons">
-                    <label class="btn btn-success">
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.City, statuses.Verified)">
                         <input type="radio" name="City" id="City_On">Validate</label>
                     <label class="btn btn-warning">
                         <input type="radio" name="City" id="City_NA" />Waiting</label>
-                    <label class="btn btn-danger">
-                        <input type="radio" name="City" id="City_Reject" />Reject</label>
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.City, statuses.Rejected)">
+                        <input type="radio" name="City" id="City_Reject"/>Reject</label>
                 </div>
 
                 <span [hidden]='!(getAttributeValidation(attributeTypes.City) == 1)' class="badge badge-success">Verified</span>
@@ -361,12 +361,12 @@
                 </label>
                 <input type="text" value='{{getAttribute(attributeTypes.Street)}}' class="form-control width-custom mr-custom" id="Street" name='Street'>
                 <div [hidden]='getAttributeValidation(attributeTypes.Street) == 1' class="btn-group default-position  " data-toggle="buttons">
-                    <label class="btn btn-success">
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.Street, statuses.Verified)">
                         <input type="radio" name="Street" id="Street_On">Validate</label>
                     <label class="btn btn-warning">
                         <input type="radio" name="Street" id="Street_NA" />Waiting</label>
-                    <label class="btn btn-danger">
-                        <input type="radio" name="Street" id="Street_Reject" />Reject</label>
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.Street, statuses.Rejected)">
+                        <input type="radio" name="Street" id="Street_Reject"/>Reject</label>
                 </div>
 
                 <span [hidden]='!(getAttributeValidation(attributeTypes.Street) == 1)' class="badge badge-success">Verified</span>
@@ -384,12 +384,12 @@
                 </label>
                 <input type="text" value='{{getAttribute(attributeTypes.House)}}' class="form-control  width-custom mr-custom" id="House" name='House'>
                 <div [hidden]='getAttributeValidation(attributeTypes.House) == 1' class="btn-group default-position " data-toggle="buttons">
-                    <label class="btn btn-success">
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.House, statuses.Verified)">
                         <input type="radio" name="House" id="House_On">Validate</label>
                     <label class="btn btn-warning">
                         <input type="radio" name="House" id="House_NA" />Waiting</label>
-                    <label class="btn btn-danger">
-                        <input type="radio" name="House" id="House_Reject" />Reject</label>
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.House, statuses.Rejected)">
+                        <input type="radio" name="House" id="House_Reject"/>Reject</label>
                 </div>
 
                 <span [hidden]='!(getAttributeValidation(attributeTypes.House) == 1)' class="badge badge-success">Verified</span>
@@ -401,12 +401,12 @@
                 <label for="Flat" class="col-form-label">Flat: </label>
                 <input value='{{getAttribute(attributeTypes.Flat)}}' type="text" class="form-control  width-custom mr-custom" id="Flat" name='Flat'>
                 <div [hidden]='getAttributeValidation(attributeTypes.Flat) == 1' class="btn-group default-position  " data-toggle="buttons">
-                    <label class="btn btn-success">
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.Flat, statuses.Verified)">
                         <input type="radio" name="Flat" id="Flat_On">Validate</label>
                     <label class="btn btn-warning">
                         <input type="radio" name="Flat" id="Flat_NA" />Waiting</label>
-                    <label class="btn btn-danger">
-                        <input type="radio" name="Flat" id="Flat_Reject" />Reject</label>
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.Flat, statuses.Rejected)">
+                        <input type="radio" name="Flat" id="Flat_Reject"/>Reject</label>
                 </div>
 
                 <span [hidden]='!(getAttributeValidation(attributeTypes.Flat) == 1)' class="badge badge-success">Verified</span>
