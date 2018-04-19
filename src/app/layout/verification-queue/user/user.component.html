@@ -33,7 +33,7 @@
             <div class="photoBlock col-12 mt-3">
                 <div class="border mb-3">
                     <div class="passportPhoto mb-2">
-                        <img src="" alt="photo">
+                        <img src="{{passportPhoto}}" alt="photo" style="width: 100%; height: 100%; background: #ccc;">
                     </div>
                     <div class="zoom col-12 mb-3">
                         <button class="btn btn-zoom float-right ml-2">+</button>
@@ -85,7 +85,7 @@
                         </span>
                     </span>
                 </label>
-                <input type="text"  class="form-control width-custom mr-custom" id="Surname" name='Surname'>
+                <input [(ngModel)]='surname' type="text"  class="form-control width-custom mr-custom" id="Surname" name='Surname'>
                 <div class="btn-group default-position  btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-success">
                         <input type="radio" name="options" id="Surname_On">Validate</label>
@@ -285,7 +285,7 @@
         <div class="col-md-6 col-sm-12">
             <div class="photoBlock col-12 mt-3">
                 <div class="passportPhoto mb-2">
-                    <img src="" alt="photo" style="width: 100%; height: 100%; background: #ccc;">
+                    <img src="{{addressPhoto}}" alt="photo" style="width: 100%; height: 100%; background: #ccc;">
                 </div>
                 <label for="">Address
                     <span class="text-danger">
@@ -460,7 +460,7 @@
             <div class="photoBlock col-12 mt-3">
                 <div class="border mb-3">
                     <div class="passportPhoto mb-2">
-                        <img src="" alt="photo">
+                        <img src="{{userPhoto}}" alt="photo" style="width: 100%; height: 100%; background: #ccc;">
                     </div>
                     <div class="zoom col-12 mb-3">
                         <button class="btn btn-zoom float-right ml-2">+</button>

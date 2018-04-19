@@ -1,6 +1,7 @@
 import { Component, OnInit, NgModule, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { UserService } from './../../../shared/core/user.service';
 import { LoaderService } from './../../../shared/core/loader.service';
@@ -16,7 +17,7 @@ import { NgModel, FormGroup, FormControl } from '@angular/forms';
     providers: [UserService, HttpClient, NgModel]
 })
 export class UserComponent implements OnInit {
-    surname: string;
+    surname = '11232';
     private id: number;
     user: any;
     attributeTypes: any;
@@ -100,7 +101,6 @@ export class UserComponent implements OnInit {
             }
             if (type === this.attributeTypes.AddressPhoto) {
                 this.addressPhoto = reader.result;
-                console.log(this.addressPhoto);
             }
         };
     }

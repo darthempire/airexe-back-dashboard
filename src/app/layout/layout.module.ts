@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { LayoutComponent } from './layout.component';
 import { LayoutRoutingModule } from './layout-routing.module';
@@ -10,7 +11,9 @@ import { UserComponent } from './verification-queue/user/user.component';
 @NgModule({
   imports: [
     CommonModule,
-    LayoutRoutingModule
+    LayoutRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [LayoutComponent, NavbarComponent, SidebarComponent, UserComponent]
 })

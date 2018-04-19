@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { VerificationQueueRoutingModule } from './verification-queue-routing.module';
 
@@ -7,7 +8,7 @@ import { VerificationQueueComponent } from './verification-queue.component';
 
 import { HttpClient } from './../../shared/utils/HttpClient';
 import { UserService } from './../../shared/core/user.service';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 
 
 
