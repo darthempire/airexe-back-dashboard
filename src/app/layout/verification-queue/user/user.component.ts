@@ -18,6 +18,11 @@ import { CountryCodes } from './country-codes';
     providers: [UserService, HttpClient]
 })
 export class UserComponent implements OnInit {
+    userID: string;
+    CreatedDate: Date;
+    UpdateDate: Date;
+    UserStatus: string;
+
     surname = '11232';
     private id: number;
     badSend = false;
@@ -81,6 +86,11 @@ export class UserComponent implements OnInit {
             .then(data => {
                 this.loaderService.display(false);
                 this.user = JSON.parse(data['_body']);
+                this.userID = this.user.id;
+                this.CreatedDate = this.user.createdDate;
+                this.UpdateDate = this.user.updateDate;
+                this.UserStatus = this.user.status;
+
                 console.log(this.user);
                 this.getSourses();
             })
@@ -297,5 +307,9 @@ enum AttributeTypes {
     PassportExpirationDate = '1044',
     PassportPhoto = '1070',
     AddressPhoto = '1071',
-    UserPhoto = '1072'
+    UserPhoto = '1072',
+
+    Selfie = '1100',
+    Address = '1101',
+    Passport = '1102'
 }
