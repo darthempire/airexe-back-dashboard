@@ -23,7 +23,6 @@ export class UserComponent implements OnInit {
     UpdateDate: Date;
     UserStatus: string;
 
-    surname = '11232';
     private id: number;
     badSend = false;
     goodSend = false;
@@ -76,7 +75,6 @@ export class UserComponent implements OnInit {
     ngOnInit() {
         this.getUser();
         this.getSourses();
-        this.surname = this.getAttribute(this.attributeTypes.Surname);
     }
 
     getUser() {
@@ -91,8 +89,6 @@ export class UserComponent implements OnInit {
                 this.UpdateDate = this.user.updateDate;
                 this.UserStatus = this.user.status;
 
-
-                console.log(this.user);
                 this.getSourses();
             })
             .catch(err => {
@@ -194,7 +190,6 @@ export class UserComponent implements OnInit {
     saveChanges() {
         this.badSend = false;
         this.goodSend = false;
-        console.log(this.changedFields);
         if (this.checkRequired()) {
             const images = [];
             images.push(
@@ -308,9 +303,5 @@ enum AttributeTypes {
     PassportExpirationDate = '1044',
     PassportPhoto = '1070',
     AddressPhoto = '1071',
-    UserPhoto = '1072',
-    //
-    Selfie = '1100',
-    Address = '1101',
-    Passport = '1102'
+    UserPhoto = '1072'
 }

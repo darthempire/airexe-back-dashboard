@@ -45,17 +45,17 @@
                     <span class="text-danger">
                         <b> * </b>
                     </span>
-                    <span [hidden]='!(getAttributeValidation(attributeTypes.Passport) == 1)' class="badge badge-success">Verified</span>
+                    <!-- <span [hidden]='!(getAttributeValidation(attributeTypes.Passport) == 1)' class="badge badge-success">Verified</span>
                     <span [hidden]='!(getAttributeValidation(attributeTypes.Passport) == 2)' class="badge badge-danger">Rejected</span>
-                    <span [hidden]='!(getAttributeValidation(attributeTypes.Passport) == 0)' class="badge badge-warning">Waiting verification</span>
+                    <span [hidden]='!(getAttributeValidation(attributeTypes.Passport) == 0)' class="badge badge-warning">Waiting verification</span> -->
                 </label>
-                <div [hidden]='getAttributeValidation(attributeTypes.Passport) == 1' class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.Passport, statuses.Verified)">
-                        <input type="radio" name="Passport" id="Passport_On" >Validate</label>
+                <div [hidden]='getAttributeValidation(attributeTypes.PassportPhoto) == 1' class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.PassportPhoto, statuses.Verified)">
+                        <input type="radio" name="PassportPhoto" id="PassportPhoto_On" >Validate</label>
                     <label class="btn btn-warning">
-                        <input type="radio" name="Passport" id="Passport_On_NA" checked disabled />Waiting</label>
-                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.Passport, statuses.Reject)">
-                        <input type="radio" name="Passport" id="Passport_On_Reject" />Reject</label>
+                        <input type="radio" name="PassportPhoto" id="PassportPhoto_On_NA" checked disabled />Waiting</label>
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.PassportPhoto, statuses.Reject)">
+                        <input type="radio" name="PassportPhoto" id="PassportPhoto_On_Reject" />Reject</label>
                 </div>
             </div>
         </div>
@@ -279,21 +279,21 @@
                     <!-- [imageZoom]="addressPhoto" -->
                     <img src="{{addressPhoto}}" alt="photo" style="width: 100%; height: 100%; background: #ccc;">
                 </div>
-                <label for="">Address
+                <label for="">Address Photo
                     <span class="text-danger">
                         <b> * </b>
                     </span>
-                    <span [hidden]='!(getAttributeValidation(attributeTypes.Address) == 1)' class="badge badge-success">Verified</span>
-                    <span [hidden]='!(getAttributeValidation(attributeTypes.Address) == 2)' class="badge badge-danger">Rejected</span>
-                    <span [hidden]='!(getAttributeValidation(attributeTypes.Address) == 0)' class="badge badge-warning">Waiting verification</span>
+                    <span [hidden]='!(getAttributeValidation(attributeTypes.AddressPhoto) == 1)' class="badge badge-success">Verified</span>
+                    <span [hidden]='!(getAttributeValidation(attributeTypes.AddressPhoto) == 2)' class="badge badge-danger">Rejected</span>
+                    <span [hidden]='!(getAttributeValidation(attributeTypes.AddressPhoto) == 0)' class="badge badge-warning">Waiting verification</span>
                 </label>
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.Address, statuses.Rejected)">
-                        <input type="radio" name="passportPhoto" id="Address_On">Validate</label>
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.AddressPhoto, statuses.Rejected)">
+                        <input type="radio" name="passportPhoto" id="AddressPhoto_On">Validate</label>
                     <label class="btn btn-warning">
-                        <input type="radio" name="passportPhoto" id="Address_NA"  checked disabled/>Waiting</label>
-                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.Address, statuses.Rejected)">
-                        <input type="radio" name="passportPhoto" id="Address_Reject" />Reject</label>
+                        <input type="radio" name="passportPhoto" id="AddressPhoto_NA"  checked disabled/>Waiting</label>
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.AddressPhoto, statuses.Rejected)">
+                        <input type="radio" name="passportPhoto" id="AddressPhoto_Reject" />Reject</label>
                 </div>
             </div>
         </div>
@@ -464,13 +464,13 @@
                     </span>
                     <span class="badge badge-warning"> Waiting verification</span>
                 </label>
-                <div [hidden]='getAttributeValidation(attributeTypes.Selfie) == 1' class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.Selfie, statuses.Verified)">
-                            <input type="radio" name="Selfie" id="Selfie_On">Validate</label>
+                <div [hidden]='getAttributeValidation(attributeTypes.UserPhoto) == 1' class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.UserPhoto, statuses.Verified)">
+                            <input type="radio" name="UserPhoto" id="UserPhoto_On">Validate</label>
                     <label class="btn btn-warning">
-                            <input type="radio" name="Selfie" id="Selfie_NA" checked disabled />Waiting</label>
-                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.Selfie, statuses.Rejected)">
-                            <input type="radio" name="Selfie" id="Selfie_Reject"/>Reject</label>
+                            <input type="radio" name="UserPhoto" id="UserPhoto_NA" checked disabled />Waiting</label>
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.UserPhoto, statuses.Rejected)">
+                            <input type="radio" name="UserPhoto" id="UserPhoto_Reject"/>Reject</label>
                 </div>
             </div>
         </div>
