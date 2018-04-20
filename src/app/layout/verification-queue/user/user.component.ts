@@ -30,6 +30,7 @@ export class UserComponent implements OnInit {
     user: any;
     attributeTypes: any;
     countryCodes: any = CountryCodes;
+    requiredSelected = false;
 
     passportPhoto: any;
     addressPhoto: any;
@@ -170,11 +171,13 @@ export class UserComponent implements OnInit {
 
     checkRequired() {
         this.refillRequired();
+        this.requiredSelected = false;
         let isAllSelected = true;
         this.requiredFields.forEach(element => {
             if (element.validation === 0) {
                 // 0 - waiting
                 isAllSelected = false;
+                this.requiredSelected = true;
             }
         });
         return isAllSelected;
@@ -234,10 +237,10 @@ export class UserComponent implements OnInit {
 
                     if (element.validation === this.statuses.Verified && _.find(this.changedFields, {code: element.code})) {
                         console.log(element);
-                        this.validate(element.code);
+                        this.validate(element.code, this.id);
                     }
                     if (element.validation === this.statuses.Rejected && _.find(this.changedFields, {code: element.code})) {
-                        this.reject(element.code);
+                        this.reject(element.code, this.id);
                     }
                 }
             });
@@ -249,12 +252,14 @@ export class UserComponent implements OnInit {
         this.badSend = false;
         this.goodSend = true;
         this.userService
-            .verifyUser()
+            .verifyUser(this.id)
             .then(data => {
                 this.goodSend = true;
+                this.getUser();
             })
             .catch(err => {
                 this.badSend = true;
+                this.getUser();
             });
     }
 
@@ -262,23 +267,25 @@ export class UserComponent implements OnInit {
         this.badSend = false;
         this.goodSend = true;
         this.userService
-            .rejectUser()
+            .rejectUser(this.id)
             .then(data => {
                 this.goodSend = true;
+                this.getUser();
             })
             .catch(err => {
                 this.badSend = true;
+                this.getUser();
             });
     }
 
-    validate(code) {
-        this.userService.validate(code).catch(err => {
+    validate(code, userId) {
+        this.userService.validate(code, userId).catch(err => {
             this.badSend = true;
         });
     }
 
-    reject(code) {
-        this.userService.reject(code).catch(err => {
+    reject(code, userId) {
+        this.userService.reject(code, userId).catch(err => {
             this.badSend = true;
         });
     }

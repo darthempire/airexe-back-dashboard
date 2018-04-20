@@ -89,16 +89,16 @@ export class UserService {
         );
     }
 
-    validate(code) {
+    validate(code, userId) {
         return this.http.put(
-            `${environment.apiUrl}users/${this.authService.getUserInfo().userId}/attributes/${code}/validate`,
+            `${environment.apiUrl}users/${userId}/attributes/${code}/validate`,
             null
         );
     }
 
-    reject(code) {
+    reject(code, userId) {
         return this.http.put(
-            `${environment.apiUrl}users/${this.authService.getUserInfo().userId}/attributes/${code}/reject`,
+            `${environment.apiUrl}users/${userId}/attributes/${code}/reject`,
             null
         );
     }
@@ -117,16 +117,16 @@ export class UserService {
         );
     }
 
-    verifyUser() {
+    verifyUser(userId) {
         return this.http.put(
-            `${environment.apiUrl}users/${this.authService.getUserInfo().userId}/verify`,
+            `${environment.apiUrl}users/${userId}/verify`,
             null
         );
     }
 
-    rejectUser() {
+    rejectUser(userId) {
         return this.http.put(
-            `${environment.apiUrl}users/${this.authService.getUserInfo().userId}/reject`,
+            `${environment.apiUrl}users/${userId}/reject`,
             null
         );
     }
