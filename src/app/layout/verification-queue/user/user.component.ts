@@ -10,6 +10,7 @@ import { HttpClient } from './../../../shared/utils/HttpClient';
 import * as _ from 'lodash';
 
 import { CountryCodes } from './country-codes';
+import { log } from 'util';
 
 @Component({
     selector: 'app-user',
@@ -84,10 +85,12 @@ export class UserComponent implements OnInit {
             .then(data => {
                 this.loaderService.display(false);
                 this.user = JSON.parse(data['_body']);
+
                 this.userID = this.user.id;
                 this.CreatedDate = this.user.createdDate;
                 this.UpdateDate = this.user.updateDate;
                 this.UserStatus = this.user.status;
+                console.log(this.user);
 
                 this.getSourses();
             })
@@ -139,8 +142,9 @@ export class UserComponent implements OnInit {
 
     getAttributeValidation(type) {
         if (this.user !== undefined) {
-            return _.find(this.user.attrs, { code: type }).validation;
+            return _.find(this.user.attrs, { code: type }) === undefined ? 0 : _.find(this.user.attrs, { code: type }).validation;
         }
+
         return '';
     }
 
@@ -166,11 +170,11 @@ export class UserComponent implements OnInit {
 
     checkRequired() {
         this.refillRequired();
-        let isAllSelected = false;
+        let isAllSelected = true;
         this.requiredFields.forEach(element => {
-            if (element.status === 0) {
+            if (element.validation === 0) {
                 // 0 - waiting
-                isAllSelected = true;
+                isAllSelected = false;
             }
         });
         return isAllSelected;
@@ -180,6 +184,7 @@ export class UserComponent implements OnInit {
         this.user.attrs.forEach(element => {
             if (element.code === type) {
                 element.validation = status;
+                console.log(this.user);
                 this.changedFields.push(
                     _.find(this.user.attrs, { code: type })
                 );
@@ -191,44 +196,52 @@ export class UserComponent implements OnInit {
         this.badSend = false;
         this.goodSend = false;
         if (this.checkRequired()) {
+            const attrs = this.user.attrs;
             const images = [];
             images.push(
-                _.find(this.changedFields, {
+                _.find(attrs, {
                     code: AttributeTypes.PassportPhoto
                 })
             );
             images.push(
-                _.find(this.changedFields, { code: AttributeTypes.UserPhoto })
+                _.find(attrs, { code: AttributeTypes.UserPhoto })
             );
             images.push(
-                _.find(this.changedFields, {
+                _.find(attrs, {
                     code: AttributeTypes.AddressPhoto
                 })
             );
-
-            _.remove(this.changedFields, {
+            console.log(images);
+            _.remove(attrs, {
                 code: AttributeTypes.PassportPhoto
             });
-            _.remove(this.changedFields, { code: AttributeTypes.UserPhoto });
-            _.remove(this.changedFields, { code: AttributeTypes.AddressPhoto });
+            _.remove(attrs, { code: AttributeTypes.UserPhoto });
+            _.remove(attrs, { code: AttributeTypes.AddressPhoto });
 
             images.forEach(element => {
-                if (element.validation === this.statuses.Verified) {
-                    this.validateSource(element.value);
-                }
-                if (element.validation === this.statuses.Rejected) {
-                    this.rejectSource(element.value);
+                if (element.value !== '') {
+                    if (element.validation === this.statuses.Verified && _.find(this.changedFields, {code: element.code})) {
+                        this.validateSource(element.value);
+                    }
+                    if (element.validation === this.statuses.Rejected && _.find(this.changedFields, {code: element.code})) {
+                        this.rejectSource(element.value);
+                    }
                 }
             });
 
-            this.changedFields.forEach(element => {
-                if (element.validation === this.statuses.Verified) {
-                    this.validate(element.code);
-                }
-                if (element.validation === this.statuses.Rejected) {
-                    this.reject(element.code);
+            attrs.forEach(element => {
+                if (element.code !== AttributeTypes.Email && element.value !== '') {
+
+                    if (element.validation === this.statuses.Verified && _.find(this.changedFields, {code: element.code})) {
+                        console.log(element);
+                        this.validate(element.code);
+                    }
+                    if (element.validation === this.statuses.Rejected && _.find(this.changedFields, {code: element.code})) {
+                        this.reject(element.code);
+                    }
                 }
             });
+            this.getUser();
         }
     }
 

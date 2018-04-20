@@ -33,7 +33,7 @@
             <div class="photoBlock col-12 mt-3">
                 <div class="border mb-3">
                     <div class="passportPhoto mb-2">
-                        <img src="{{passportPhoto}}" alt="photo" style="width: 100%; height: 100%; background: #ccc;">
+                        <img src="{{passportPhoto}}" alt="Error when uploading image" style="width: 100%; height: 100%; background: #ccc;">
                     </div>
                     <div class="zoom col-12 mb-3">
                         <button class="btn btn-zoom float-right ml-2">+</button>
@@ -45,9 +45,9 @@
                     <span class="text-danger">
                         <b> * </b>
                     </span>
-                    <!-- <span [hidden]='!(getAttributeValidation(attributeTypes.Passport) == 1)' class="badge badge-success">Verified</span>
-                    <span [hidden]='!(getAttributeValidation(attributeTypes.Passport) == 2)' class="badge badge-danger">Rejected</span>
-                    <span [hidden]='!(getAttributeValidation(attributeTypes.Passport) == 0)' class="badge badge-warning">Waiting verification</span> -->
+                    <span [hidden]='!(getAttributeValidation(attributeTypes.PassportPhoto) == 1)' class="badge badge-success">Verified</span>
+                    <span [hidden]='!(getAttributeValidation(attributeTypes.PassportPhoto) == 2)' class="badge badge-danger">Rejected</span>
+                    <span [hidden]='!(getAttributeValidation(attributeTypes.PassportPhoto) == 0)' class="badge badge-warning">Waiting verification</span>
                 </label>
                 <div [hidden]='getAttributeValidation(attributeTypes.PassportPhoto) == 1' class="btn-group" data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.PassportPhoto, statuses.Verified)">
@@ -277,7 +277,7 @@
             <div class="photoBlock col-12 mt-3">
                 <div class="passportPhoto mb-2">
                     <!-- [imageZoom]="addressPhoto" -->
-                    <img src="{{addressPhoto}}" alt="photo" style="width: 100%; height: 100%; background: #ccc;">
+                    <img src="{{addressPhoto}}" alt="Error when uploading image" style="width: 100%; height: 100%; background: #ccc;">
                 </div>
                 <label for="">Address Photo
                     <span class="text-danger">
@@ -287,8 +287,8 @@
                     <span [hidden]='!(getAttributeValidation(attributeTypes.AddressPhoto) == 2)' class="badge badge-danger">Rejected</span>
                     <span [hidden]='!(getAttributeValidation(attributeTypes.AddressPhoto) == 0)' class="badge badge-warning">Waiting verification</span>
                 </label>
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.AddressPhoto, statuses.Rejected)">
+                <div [hidden]='getAttributeValidation(attributeTypes.AddressPhoto) == 1' class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.AddressPhoto, statuses.Verified)">
                         <input type="radio" name="passportPhoto" id="AddressPhoto_On">Validate</label>
                     <label class="btn btn-warning">
                         <input type="radio" name="passportPhoto" id="AddressPhoto_NA"  checked disabled/>Waiting</label>
@@ -308,11 +308,11 @@
                 </label>
                 <input value="{{getCountryName(getAttribute(attributeTypes.CountryCode))}}" class="form-control  width-custom mr-custom" id="CountryCode" name='CountryCode'>
                 <div [hidden]='getAttributeValidation(attributeTypes.CountryCode) == 1' class="btn-group toggle-pos  mobile-position_radio toggle-pos  mobile-position_radio " data-toggle="buttons">
-                    <label class="btn btn-success">
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.CountryCode, statuses.Verified)">
                             <input type="radio" name="PassportExpirationDate" id="PassportExpirationDate_On">Validate</label>
                     <label class="btn btn-warning">
                             <input type="radio" name="PassportExpirationDate" id="PassportExpirationDate_NA" checked disabled />Waiting</label>
-                    <label class="btn btn-danger">
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.CountryCode, statuses.Rejected)">
                             <input type="radio" name="PassportExpirationDate" id="PassportExpirationDate_Reject" />Reject</label>
                 </div>
                 <span [hidden]='!(getAttributeValidation(attributeTypes.CountryCode) == 1)' class="badge badge-success mobile-position_span">Verified</span>
@@ -328,13 +328,13 @@
                         </span>
                     </span>
                 </label>
-                <input value="{{getCountryName(getAttribute(attributeTypes.Zip))}}" class="form-control  width-custom mr-custom" id="Zip" name='Zip'>
+                <input value="{{getAttribute(attributeTypes.Zip)}}" class="form-control  width-custom mr-custom" id="Zip" name='Zip'>
                 <div [hidden]='getAttributeValidation(attributeTypes.Zip) == 1' class="btn-group toggle-pos  mobile-position_radio toggle-pos  mobile-position_radio " data-toggle="buttons">
-                    <label class="btn btn-success">
+                    <label class="btn btn-success" (click)="changeStatus(attributeTypes.Zip, statuses.Verified)">
                                 <input type="radio" name="Zip" id="Zip_On">Validate</label>
                     <label class="btn btn-warning">
                                 <input type="radio" name="Zip" id="Zip_NA" checked disabled />Waiting</label>
-                    <label class="btn btn-danger">
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.Zip, statuses.Rejected)">
                                 <input type="radio" name="Zip" id="Zip_Reject" />Reject</label>
                 </div>
                 <span [hidden]='!(getAttributeValidation(attributeTypes.Zip) == 1)' class="badge badge-success mobile-position_span">Verified</span>
@@ -450,7 +450,7 @@
             <div class="photoBlock col-12 mt-3">
                 <div class="border mb-3">
                     <div class="passportPhoto mb-2">
-                        <img src="{{userPhoto}}" alt="photo" style="width: 100%; height: 100%; background: #ccc;">
+                        <img src="{{userPhoto}}" alt="Error when uploading image" style="width: 100%; height: 100%; background: #ccc;">
                     </div>
                     <div class="zoom col-12 mb-3">
                         <button class="btn btn-zoom float-right ml-2">+</button>
@@ -462,7 +462,10 @@
                     <span class="text-danger">
                         <b> * </b>
                     </span>
-                    <span class="badge badge-warning"> Waiting verification</span>
+                    <span [hidden]='!(getAttributeValidation(attributeTypes.UserPhoto) == 1)' class="badge badge-success mobile-position_span">Verified</span>
+                    <span [hidden]='!(getAttributeValidation(attributeTypes.UserPhoto) == 2)' class="badge badge-danger mobile-position_span">Rejected</span>
+                    <span [hidden]='!(getAttributeValidation(attributeTypes.UserPhoto) == 0)' class="badge badge-warning mobile-position_span">Waiting verification</span>
+
                 </label>
                 <div [hidden]='getAttributeValidation(attributeTypes.UserPhoto) == 1' class="btn-group" data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.UserPhoto, statuses.Verified)">
