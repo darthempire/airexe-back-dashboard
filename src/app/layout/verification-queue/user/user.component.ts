@@ -174,12 +174,15 @@ export class UserComponent implements OnInit {
         this.requiredSelected = false;
         let isAllSelected = true;
         this.user.attrs.forEach(element => {
-            if (element.validation === 0 && _.find(this.requiredFieldCodes, element.code)) {
+
+            if (element.validation === 0 && _.find(this.requiredFieldCodes, element.code) !== undefined) {
+                console.log(_.find(this.requiredFieldCodes, element.code));
                 // 0 - waiting
                 isAllSelected = false;
                 this.requiredSelected = true;
             }
         });
+        console.log(isAllSelected);
         return isAllSelected;
     }
 
@@ -198,7 +201,7 @@ export class UserComponent implements OnInit {
     saveChanges() {
         this.badSend = false;
         this.goodSend = false;
-        if (this.checkRequired()) {
+        if (!this.checkRequired()) {
             const attrs = this.user.attrs;
             const images = [];
             images.push(
@@ -229,6 +232,8 @@ export class UserComponent implements OnInit {
             this.rejectNew(attrs, 0, this.id);
 
             alert('Changes saved!');
+        } else {
+            this.badSend = true;
         }
     }
 
@@ -368,6 +373,18 @@ export class UserComponent implements OnInit {
         }
     }
 
+    checkValidateUser() {
+        let isValid = true;
+        this.user.attrs.forEach(element => {
+            if (_.find(this.requiredFieldCodes, element.code) !== undefined && element.validation !== this.statuses.Verified ) {
+                isValid = false;
+            }
+        });
+
+        if (!isValid) {
+            alert('CANNOT SAVE! Not all mandatory fields status selected');
+        }
+    }
 
     validate(code, userId) {
         return this.userService.validate(code, userId)

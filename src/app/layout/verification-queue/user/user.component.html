@@ -68,7 +68,7 @@
                         </span>
                     </span>
                 </label>
-                <input value='{{getAttribute(attributeTypes.FirstName)}}' type="text" class="form-control width-custom mr-custom" id="firstname" name='firstname' required #firstname>
+                <input disabled value='{{getAttribute(attributeTypes.FirstName)}}' type="text" class="form-control width-custom mr-custom" id="firstname" name='firstname' required #firstname>
                 <div [hidden]='getAttributeValidation(attributeTypes.FirstName) == 1' class="btn-group toggle-pos  mobile-position_radio" data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.FirstName, statuses.Verified)">
                         <input type="radio" name="FirstName" id="FirstName_On" >Validatd</label>
@@ -89,7 +89,7 @@
                         </span>
                     </span>
                 </label>
-                <input value='{{getAttribute(attributeTypes.Surname)}}' type="text" class="form-control width-custom mr-custom" id="Surname" name='Surname'>
+                <input disabled value='{{getAttribute(attributeTypes.Surname)}}' type="text" class="form-control width-custom mr-custom" id="Surname" name='Surname'>
                 <div [hidden]='getAttributeValidation(attributeTypes.Surname) == 1' class="btn-group toggle-pos mobile-position_radio" data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.Surname, statuses.Verified)">
                         <input type="radio" name="Surname" id="Surname_On" >Validatd</label>
@@ -104,7 +104,7 @@
             </div>
             <div class="form-group">
                 <label for="MiddleName" class="col-form-label">Middle Name: </label>
-                <input type="text" value='{{getAttribute(attributeTypes.MiddleName)}}' class="form-control  width-custom mr-custom" id="MiddleName" name='MiddleName'>
+                <input disabled type="text" value='{{getAttribute(attributeTypes.MiddleName)}}' class="form-control  width-custom mr-custom" id="MiddleName" name='MiddleName'>
                 <div [hidden]='getAttributeValidation(attributeTypes.MiddleName) == 1' class="btn-group toggle-pos mobile-position_radio" data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.MiddleName, statuses.Verified)">
                         <input type="radio" name="MiddleName" id="MiddleName_On" >Validatd</label>
@@ -140,7 +140,7 @@
                         </span>
                     </span>
                 </label>
-                <select class="form-control  width-custom mr-custom" id="Gender" name='Gender' value='{{getAttribute(attributeTypes.Gender)}}'>
+                <select disabled class="form-control  width-custom mr-custom" id="Gender" name='Gender' value='{{getAttribute(attributeTypes.Gender)}}'>
                     <option value="1">Male</option>
                     <option value="0">Female</option>
                 </select>
@@ -165,7 +165,7 @@
                         </span>
                     </span>
                 </label>
-                <input type="text" value='{{getAttribute(attributeTypes.BirthDate)}}' class="form-control  width-custom mr-custom" id="BirthDate" name='BirthDate'>
+                <input disabled type="text" value='{{getAttribute(attributeTypes.BirthDate)}}' class="form-control  width-custom mr-custom" id="BirthDate" name='BirthDate'>
 
                 <div [hidden]='getAttributeValidation(attributeTypes.BirthDate) == 1' class="btn-group default-position " data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.BirthDate, statuses.Verified)">
@@ -189,7 +189,7 @@
                         </span>
                     </span>
                 </label>
-                <select value='{{getAttribute(attributeTypes.PassportType)}}' class="form-control  width-custom mr-custom" id="PassportType" name='PassportType'>
+                <select disabled value='{{getAttribute(attributeTypes.PassportType)}}' class="form-control  width-custom mr-custom" id="PassportType" name='PassportType'>
                     <option value="1">International Passport</option>
                     <option value="2">National Passport</option>
                     <option value="3">National ID</option>
@@ -217,8 +217,7 @@
                         </span>
                     </span>
                 </label>
-                {{getAttribute(attributeTypes.PassportNumber).toString()}}
-                <input type="text" value='{{getAttribute(attributeTypes.PassportNumber)}}' class="form-control  width-custom mr-custom" id="PassportNumber" name='PassportNumber'>
+                <input disabled type="text" value='{{getAttribute(attributeTypes.PassportNumber)}}' class="form-control  width-custom mr-custom" id="PassportNumber" name='PassportNumber'>
                 <div [hidden]='getAttributeValidation(attributeTypes.PassportNumber) == 1' class="btn-group toggle-pos  mobile-position_radio toggle-pos  mobile-position_radio " data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.PassportNumber, statuses.Verified)">
                         <input type="radio" name="PassportNumber" id="PassportNumber_On" >Validate</label>
@@ -241,7 +240,7 @@
                         </span>
                     </span>
                 </label>
-                <input type="text" value='{{getAttribute(attributeTypes.PassportIssueDate)}}' class="form-control  width-custom mr-custom" id="PassportIssueDate" name='PassportIssueDate'>
+                <input disabled type="text" value='{{getAttribute(attributeTypes.PassportIssueDate)}}' class="form-control  width-custom mr-custom" id="PassportIssueDate" name='PassportIssueDate'>
                 <div [hidden]='getAttributeValidation(attributeTypes.PassportIssueDate) == 1' class="btn-group toggle-pos  mobile-position_radio" data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.PassportIssueDate, statuses.Verified)">
                         <input type="radio" name="PassportIssueDate" id="PassportIssueDate_On" >Validate</label>
@@ -258,7 +257,7 @@
             </div>
             <div class="form-group">
                 <label for="PassportExpirationDate" class="col-form-label">Passport/ID Expiration Date: </label>
-                <input value='{{getAttribute(attributeTypes.PassportExpirationDate)}}' type="text" class="form-control  width-custom mr-custom" id="PassportExpirationDate" name='PassportExpirationDate'>
+                <input disabled value='{{getAttribute(attributeTypes.PassportExpirationDate)}}' type="text" class="form-control  width-custom mr-custom" id="PassportExpirationDate" name='PassportExpirationDate'>
                 <div [hidden]='getAttributeValidation(attributeTypes.PassportExpirationDate) == 1' class="btn-group toggle-pos mobile-position_radio" data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.PassportExpirationDate, statuses.Verified)">
                         <input type="radio" name="PassportExpirationDate" id="PassportExpirationDate_On">Validate</label>
@@ -304,7 +303,7 @@
                         </span>
                     </span>
                 </label>
-                <input value="{{getCountryName(getAttribute(attributeTypes.CountryCode))}}" class="form-control  width-custom mr-custom" id="CountryCode" name='CountryCode'>
+                <input disabled value="{{getCountryName(getAttribute(attributeTypes.CountryCode))}}" class="form-control  width-custom mr-custom" id="CountryCode" name='CountryCode'>
                 <div [hidden]='getAttributeValidation(attributeTypes.CountryCode) == 1' class="btn-group toggle-pos  mobile-position_radio toggle-pos  mobile-position_radio " data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.CountryCode, statuses.Verified)">
                             <input type="radio" name="PassportExpirationDate" id="PassportExpirationDate_On">Validate</label>
@@ -326,7 +325,7 @@
                         </span>
                     </span>
                 </label>
-                <input value="{{getAttribute(attributeTypes.Zip)}}" class="form-control  width-custom mr-custom" id="Zip" name='Zip'>
+                <input disabled value="{{getAttribute(attributeTypes.Zip)}}" class="form-control  width-custom mr-custom" id="Zip" name='Zip'>
                 <div [hidden]='getAttributeValidation(attributeTypes.Zip) == 1' class="btn-group toggle-pos  mobile-position_radio toggle-pos  mobile-position_radio " data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.Zip, statuses.Verified)">
                                 <input type="radio" name="Zip" id="Zip_On">Validate</label>
@@ -342,7 +341,7 @@
             </div>
             <div class="form-group">
                 <label for="State" class="col-form-label">State: </label>
-                <input value='{{getAttribute(attributeTypes.State)}}' type="text" class="form-control  width-custom mr-custom" id="State" name='State'>
+                <input disabled value='{{getAttribute(attributeTypes.State)}}' type="text" class="form-control  width-custom mr-custom" id="State" name='State'>
                 <div [hidden]='getAttributeValidation(attributeTypes.State) == 1' class="btn-group toggle-pos  mobile-position_radio toggle-pos  mobile-position_radio " data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.State, statuses.Verified)">
                         <input type="radio" name="State" id="State_On">Validate</label>
@@ -365,7 +364,7 @@
                         </span>
                     </span>
                 </label>
-                <input type="text" value='{{getAttribute(attributeTypes.City)}}' class="form-control  width-custom mr-custom" id="City" name='City'>
+                <input disabled type="text" value='{{getAttribute(attributeTypes.City)}}' class="form-control  width-custom mr-custom" id="City" name='City'>
                 <div [hidden]='getAttributeValidation(attributeTypes.City) == 1' class="btn-group toggle-pos  mobile-position_radio toggle-pos  mobile-position_radio " data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.City, statuses.Verified)">
                         <input type="radio" name="City" id="City_On">Validate</label>
@@ -388,7 +387,7 @@
                         </span>
                     </span>
                 </label>
-                <input type="text" value='{{getAttribute(attributeTypes.Street)}}' class="form-control width-custom mr-custom" id="Street" name='Street'>
+                <input disabled type="text" value='{{getAttribute(attributeTypes.Street)}}' class="form-control width-custom mr-custom" id="Street" name='Street'>
                 <div [hidden]='getAttributeValidation(attributeTypes.Street) == 1' class="btn-group toggle-pos  mobile-position_radio toggle-pos  mobile-position_radio " data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.Street, statuses.Verified)">
                         <input type="radio" name="Street" id="Street_On">Validate</label>
@@ -411,7 +410,7 @@
                         </span>
                     </span>
                 </label>
-                <input type="text" value='{{getAttribute(attributeTypes.House)}}' class="form-control  width-custom mr-custom" id="House" name='House'>
+                <input disabled type="text" value='{{getAttribute(attributeTypes.House)}}' class="form-control  width-custom mr-custom" id="House" name='House'>
                 <div [hidden]='getAttributeValidation(attributeTypes.House) == 1' class="btn-group toggle-pos  mobile-position_radio toggle-pos  mobile-position_radio" data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.House, statuses.Verified)">
                         <input type="radio" name="House" id="House_On">Validate</label>
@@ -428,7 +427,7 @@
             </div>
             <div class="form-group">
                 <label for="Flat" class="col-form-label">Flat: </label>
-                <input value='{{getAttribute(attributeTypes.Flat)}}' type="text" class="form-control  width-custom mr-custom" id="Flat" name='Flat'>
+                <input disabled value='{{getAttribute(attributeTypes.Flat)}}' type="text" class="form-control  width-custom mr-custom" id="Flat" name='Flat'>
                 <div [hidden]='getAttributeValidation(attributeTypes.Flat) == 1' class="btn-group toggle-pos  mobile-position_radio toggle-pos  mobile-position_radio " data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.Flat, statuses.Verified)">
                         <input type="radio" name="Flat" id="Flat_On">Validate</label>
@@ -480,9 +479,6 @@
             <hr>
         </div>
         <div class="col-md-12">
-            <div class="alert alert-danger" [hidden]='!badSend' role="alert">
-                Something went wrong! Try once again later.
-            </div>
             <div [hidden]='!requiredSelected' class="alert alert-danger" [hidden]='!badSend' role="alert">
                 CANNOT SAVE! Not all mandatory fields status selected
             </div>
