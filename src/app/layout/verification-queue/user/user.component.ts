@@ -136,14 +136,14 @@ export class UserComponent implements OnInit {
 
     getAttribute(type) {
         if (this.user !== undefined) {
-            return _.find(this.user.attrs, { code: type }).value;
+            return _.find(this.user.attrs, { code: type }) === undefined ? '' : _.find(this.user.attrs, { code: type }).value;
         }
         return '';
     }
 
     getAttributeValidation(type) {
         if (this.user !== undefined) {
-            return _.find(this.user.attrs, { code: type }) === undefined ? 0 : _.find(this.user.attrs, { code: type }).validation;
+            return _.find(this.user.attrs, { code: type }) === undefined ? '' : _.find(this.user.attrs, { code: type }).validation;
         }
 
         return '';
@@ -173,8 +173,8 @@ export class UserComponent implements OnInit {
         this.refillRequired();
         this.requiredSelected = false;
         let isAllSelected = true;
-        this.requiredFields.forEach(element => {
-            if (element.validation === 0) {
+        this.user.attrs.forEach(element => {
+            if (element.validation === 0 && _.find(this.requiredFieldCodes, element.code)) {
                 // 0 - waiting
                 isAllSelected = false;
                 this.requiredSelected = true;
@@ -221,31 +221,21 @@ export class UserComponent implements OnInit {
             _.remove(attrs, { code: AttributeTypes.UserPhoto });
             _.remove(attrs, { code: AttributeTypes.AddressPhoto });
 
-            images.forEach(element => {
-                if (element.value !== '') {
-                    if (element.validation === this.statuses.Verified && _.find(this.changedFields, {code: element.code})) {
-                        this.validateSource(element.value);
-                    }
-                    if (element.validation === this.statuses.Rejected && _.find(this.changedFields, {code: element.code})) {
-                        this.rejectSource(element.value);
-                    }
-                }
-            });
+            this.validateSourseNew(images, 0, this.id);
+            this.rejectSourseNew(images, 0, this.id);
 
-            attrs.forEach(element => {
-                if (element.code !== AttributeTypes.Email && element.value !== '') {
 
-                    if (element.validation === this.statuses.Verified && _.find(this.changedFields, {code: element.code})) {
-                        console.log(element);
-                        this.validate(element.code, this.id);
-                    }
-                    if (element.validation === this.statuses.Rejected && _.find(this.changedFields, {code: element.code})) {
-                        this.reject(element.code, this.id);
-                    }
-                }
-            });
-            this.getUser();
+            this.validateNew(attrs, 0, this.id);
+            this.rejectNew(attrs, 0, this.id);
+
+            alert('Changes saved!');
         }
+    }
+
+    validateArray(array) {
+        array.forEach(element => {
+            this.validate(element.code, this.id);
+        });
     }
 
     verifyUser() {
@@ -278,8 +268,113 @@ export class UserComponent implements OnInit {
             });
     }
 
+    validateNew(arr, index, userId) {
+        if (arr[index] !== undefined && arr[index].code !== AttributeTypes.Email && arr[index].value !== '') {
+
+            if (arr[index].validation === this.statuses.Verified && _.find(this.changedFields, {code: arr[index].code})) {
+                this.userService.validate(arr[index].code, userId)
+                .then(data => {
+                    if (arr[index + 1] !== undefined) {
+                        this.validateNew(arr, index + 1, userId);
+                    }
+                })
+                .catch(err => {
+                    this.badSend = true;
+                });
+            } else {
+                if (arr[index + 1] !== undefined) {
+                    this.validateNew(arr, index + 1, userId);
+                }
+            }
+        } else {
+            if (arr[index + 1] !== undefined) {
+                this.validateNew(arr, index + 1, userId);
+            }
+        }
+    }
+
+    rejectNew(arr, index, userId) {
+        if (arr[index] !== undefined && arr[index].code !== AttributeTypes.Email && arr[index].value !== '') {
+
+            if (arr[index].validation === this.statuses.Rejected && _.find(this.changedFields, {code: arr[index].code})) {
+                this.userService.reject(arr[index].code, userId)
+                .then(data => {
+                    if (arr[index + 1] !== undefined) {
+                        this.rejectNew(arr, index + 1, userId);
+                    }
+                })
+                .catch(err => {
+                    this.badSend = true;
+                });
+            } else {
+                if (arr[index + 1] !== undefined) {
+                    this.rejectNew(arr, index + 1, userId);
+                }
+            }
+        } else {
+            if (arr[index + 1] !== undefined) {
+                this.rejectNew(arr, index + 1, userId);
+            }
+        }
+    }
+
+    validateSourseNew(arr, index, userId) {
+        if (arr[index] !== undefined && arr[index].code !== AttributeTypes.Email && arr[index].value !== '') {
+
+            if (arr[index].validation === this.statuses.Verified && _.find(this.changedFields, {code: arr[index].code})) {
+                this.userService.validateSource(arr[index].value)
+                .then(data => {
+                    if (arr[index + 1] !== undefined) {
+                        this.validateSourseNew(arr, index + 1, userId);
+                    }
+                })
+                .catch(err => {
+                    this.badSend = true;
+                });
+            } else {
+                if (arr[index + 1] !== undefined) {
+                    this.validateSourseNew(arr, index + 1, userId);
+                }
+            }
+        } else {
+            if (arr[index + 1] !== undefined) {
+                this.validateSourseNew(arr, index + 1, userId);
+            }
+        }
+    }
+
+    rejectSourseNew(arr, index, userId) {
+        if (arr[index] !== undefined && arr[index].code !== AttributeTypes.Email && arr[index].value !== '') {
+
+            if (arr[index].validation === this.statuses.Rejected && _.find(this.changedFields, {code: arr[index].code})) {
+                this.userService.rejectSource(arr[index].value)
+                .then(data => {
+                    if (arr[index + 1] !== undefined) {
+                        this.rejectSourseNew(arr, index + 1, userId);
+                    }
+                })
+                .catch(err => {
+                    this.badSend = true;
+                });
+            } else {
+                if (arr[index + 1] !== undefined) {
+                    this.rejectSourseNew(arr, index + 1, userId);
+                }
+            }
+        } else {
+            if (arr[index + 1] !== undefined) {
+                this.rejectSourseNew(arr, index + 1, userId);
+            }
+        }
+    }
+
+
     validate(code, userId) {
-        this.userService.validate(code, userId).catch(err => {
+        return this.userService.validate(code, userId)
+        .then(data => {
+
+        })
+        .catch(err => {
             this.badSend = true;
         });
     }
