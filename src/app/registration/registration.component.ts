@@ -64,7 +64,7 @@ export class RegistrationComponent implements OnInit {
             this.authService
                 .login(this.loginData)
                 .then(data => {
-                    this.router.navigate(['/dashboard']);
+                    this.router.navigate(['/verification-queue']);
                     this.loaderService.display(false);
                 })
                 .catch(err => {
