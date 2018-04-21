@@ -47,7 +47,7 @@ export class AuthService {
     }
 
     navigateToDashboard() {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/verification-queue']);
     }
 
     logout() {
