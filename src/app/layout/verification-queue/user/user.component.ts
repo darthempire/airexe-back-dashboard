@@ -1,9 +1,9 @@
-import { Component, OnInit, NgModule, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Component, OnInit, NgModule, ElementRef } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs/Subscription";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
-import { UserService } from './../../../shared/core/user.service';
+import { UserService } from "./../../../shared/core/user.service";
 import { LoaderService } from './../../../shared/core/loader.service';
 import { HttpClient } from './../../../shared/utils/HttpClient';
 
@@ -35,6 +35,7 @@ export class UserComponent implements OnInit {
     passportPhoto: any;
     addressPhoto: any;
     userPhoto: any;
+    userEmail: any;
 
     requiredFields: any = [];
     changedFields: any = [];
@@ -70,8 +71,6 @@ export class UserComponent implements OnInit {
             params => (this.id = params['id'])
         );
         this.attributeTypes = AttributeTypes;
-
-        console.log(this.attributeTypes);
     }
 
     ngOnInit() {
@@ -81,6 +80,7 @@ export class UserComponent implements OnInit {
 
     getUser() {
         this.loaderService.display(true);
+        // this.userService.validateSourceNew(12);
         this.userService
             .getUserById(this.id)
             .then(data => {
@@ -91,6 +91,7 @@ export class UserComponent implements OnInit {
                 this.CreatedDate = this.user.createdDate;
                 this.UpdateDate = this.user.updateDate;
                 this.UserStatus = this.user.status;
+                this.userEmail = _.find(this.user.attrs, { code: '1050' }).value;
                 console.log(this.user);
 
                 this.getSourses();
@@ -136,14 +137,18 @@ export class UserComponent implements OnInit {
 
     getAttribute(type) {
         if (this.user !== undefined) {
-            return _.find(this.user.attrs, { code: type }) === undefined ? '' : _.find(this.user.attrs, { code: type }).value;
+            return _.find(this.user.attrs, { code: type }) === undefined
+                ? ''
+                : _.find(this.user.attrs, { code: type }).value;
         }
         return '';
     }
 
     getAttributeValidation(type) {
         if (this.user !== undefined) {
-            return _.find(this.user.attrs, { code: type }) === undefined ? '' : _.find(this.user.attrs, { code: type }).validation;
+            return _.find(this.user.attrs, { code: type }) === undefined
+                ? ''
+                : _.find(this.user.attrs, { code: type }).validation;
         }
 
         return '';
@@ -172,17 +177,18 @@ export class UserComponent implements OnInit {
     checkRequired() {
         this.refillRequired();
         this.requiredSelected = false;
-        let isAllSelected = true;
+        let isAllSelected = false;
         this.user.attrs.forEach(element => {
-
-            if (element.validation === 0 && _.find(this.requiredFieldCodes, element.code) !== undefined) {
-                console.log(_.find(this.requiredFieldCodes, element.code));
+            if (
+                element.validation === 0 &&
+                this.requiredFieldCodes.includes(element.code) === true
+            ) {
+                console.log(element.code);
                 // 0 - waiting
-                isAllSelected = false;
                 this.requiredSelected = true;
+                isAllSelected = true;
             }
         });
-        console.log(isAllSelected);
         return isAllSelected;
     }
 
@@ -190,7 +196,6 @@ export class UserComponent implements OnInit {
         this.user.attrs.forEach(element => {
             if (element.code === type) {
                 element.validation = status;
-                console.log(this.user);
                 this.changedFields.push(
                     _.find(this.user.attrs, { code: type })
                 );
@@ -209,31 +214,34 @@ export class UserComponent implements OnInit {
                     code: AttributeTypes.PassportPhoto
                 })
             );
-            images.push(
-                _.find(attrs, { code: AttributeTypes.UserPhoto })
-            );
+            images.push(_.find(attrs, { code: AttributeTypes.UserPhoto }));
             images.push(
                 _.find(attrs, {
                     code: AttributeTypes.AddressPhoto
                 })
             );
-            console.log(images);
             _.remove(attrs, {
                 code: AttributeTypes.PassportPhoto
             });
             _.remove(attrs, { code: AttributeTypes.UserPhoto });
             _.remove(attrs, { code: AttributeTypes.AddressPhoto });
 
-            this.validateSourseNew(images, 0, this.id);
-            this.rejectSourseNew(images, 0, this.id);
-
-
-            this.validateNew(attrs, 0, this.id);
-            this.rejectNew(attrs, 0, this.id);
-
-            alert('Changes saved!');
-        } else {
-            this.badSend = true;
+            const lets = [];
+            this.loaderService.display(true);
+            try {
+                this.validateSourseNew(images).then(data => {
+                    this.rejectSourseNew(images).then(result => {
+                        this.validateNew(attrs).then(result1 => {
+                            this.rejectNew(attrs).then(result2 => {
+                                this.loaderService.display(false);
+                                this.getUser();
+                            });
+                        });
+                    });
+                });
+            } catch {
+                this.loaderService.display(false);
+            }
         }
     }
 
@@ -273,127 +281,89 @@ export class UserComponent implements OnInit {
             });
     }
 
-    validateNew(arr, index, userId) {
-        if (arr[index] !== undefined && arr[index].code !== AttributeTypes.Email && arr[index].value !== '') {
-
-            if (arr[index].validation === this.statuses.Verified && _.find(this.changedFields, {code: arr[index].code})) {
-                this.userService.validate(arr[index].code, userId)
-                .then(data => {
-                    if (arr[index + 1] !== undefined) {
-                        this.validateNew(arr, index + 1, userId);
-                    }
-                })
-                .catch(err => {
-                    this.badSend = true;
-                });
-            } else {
-                if (arr[index + 1] !== undefined) {
-                    this.validateNew(arr, index + 1, userId);
+    validateNew(arr) {
+        const elements = [];
+        arr.forEach(element => {
+            if (
+                element !== undefined &&
+                element.code !== AttributeTypes.Email
+            ) {
+                if (
+                    element.validation === this.statuses.Verified &&
+                    _.find(this.changedFields, { code: element.code })
+                ) {
+                    elements.push(element);
                 }
-            }
-        } else {
-            if (arr[index + 1] !== undefined) {
-                this.validateNew(arr, index + 1, userId);
-            }
-        }
-    }
-
-    rejectNew(arr, index, userId) {
-        if (arr[index] !== undefined && arr[index].code !== AttributeTypes.Email && arr[index].value !== '') {
-
-            if (arr[index].validation === this.statuses.Rejected && _.find(this.changedFields, {code: arr[index].code})) {
-                this.userService.reject(arr[index].code, userId)
-                .then(data => {
-                    if (arr[index + 1] !== undefined) {
-                        this.rejectNew(arr, index + 1, userId);
-                    }
-                })
-                .catch(err => {
-                    this.badSend = true;
-                });
-            } else {
-                if (arr[index + 1] !== undefined) {
-                    this.rejectNew(arr, index + 1, userId);
-                }
-            }
-        } else {
-            if (arr[index + 1] !== undefined) {
-                this.rejectNew(arr, index + 1, userId);
-            }
-        }
-    }
-
-    validateSourseNew(arr, index, userId) {
-        if (arr[index] !== undefined && arr[index].code !== AttributeTypes.Email && arr[index].value !== '') {
-
-            if (arr[index].validation === this.statuses.Verified && _.find(this.changedFields, {code: arr[index].code})) {
-                this.userService.validateSource(arr[index].value)
-                .then(data => {
-                    if (arr[index + 1] !== undefined) {
-                        this.validateSourseNew(arr, index + 1, userId);
-                    }
-                })
-                .catch(err => {
-                    this.badSend = true;
-                });
-            } else {
-                if (arr[index + 1] !== undefined) {
-                    this.validateSourseNew(arr, index + 1, userId);
-                }
-            }
-        } else {
-            if (arr[index + 1] !== undefined) {
-                this.validateSourseNew(arr, index + 1, userId);
-            }
-        }
-    }
-
-    rejectSourseNew(arr, index, userId) {
-        if (arr[index] !== undefined && arr[index].code !== AttributeTypes.Email && arr[index].value !== '') {
-
-            if (arr[index].validation === this.statuses.Rejected && _.find(this.changedFields, {code: arr[index].code})) {
-                this.userService.rejectSource(arr[index].value)
-                .then(data => {
-                    if (arr[index + 1] !== undefined) {
-                        this.rejectSourseNew(arr, index + 1, userId);
-                    }
-                })
-                .catch(err => {
-                    this.badSend = true;
-                });
-            } else {
-                if (arr[index + 1] !== undefined) {
-                    this.rejectSourseNew(arr, index + 1, userId);
-                }
-            }
-        } else {
-            if (arr[index + 1] !== undefined) {
-                this.rejectSourseNew(arr, index + 1, userId);
-            }
-        }
-    }
-
-    checkValidateUser() {
-        let isValid = true;
-        this.user.attrs.forEach(element => {
-            if (_.find(this.requiredFieldCodes, element.code) !== undefined && element.validation !== this.statuses.Verified ) {
-                isValid = false;
             }
         });
 
-        if (!isValid) {
-            alert('CANNOT SAVE! Not all mandatory fields status selected');
-        }
+        return this.userService.validateNew(elements, this.id);
+    }
+
+    rejectNew(arr) {
+        const elements = [];
+        arr.forEach(element => {
+            if (
+                element !== undefined &&
+                element.code !== AttributeTypes.Email
+            ) {
+                if (
+                    element.validation === this.statuses.Rejected &&
+                    _.find(this.changedFields, { code: element.code })
+                ) {
+                    elements.push(element);
+                }
+            }
+        });
+
+        return this.userService.rejectNew(elements, this.id);
+    }
+
+    validateSourseNew(arr) {
+        const elements = [];
+        arr.forEach(element => {
+            if (
+                element !== undefined &&
+                element.code !== AttributeTypes.Email &&
+                element.value !== ''
+            ) {
+                if (
+                    element.validation === this.statuses.Verified &&
+                    _.find(this.changedFields, { code: element.code })
+                ) {
+                    elements.push(element);
+                }
+            }
+        });
+        return this.userService.validateSourceNew(elements);
+    }
+
+    rejectSourseNew(arr) {
+        const elements = [];
+        arr.forEach(element => {
+            if (
+                element !== undefined &&
+                element.code !== AttributeTypes.Email &&
+                element.value !== ''
+            ) {
+                if (
+                    element.validation === this.statuses.Rejected &&
+                    _.find(this.changedFields, { code: element.code })
+                ) {
+                    elements.push(element);
+                }
+            }
+        });
+        return this.userService.rejectSourceNew(elements);
     }
 
     validate(code, userId) {
-        return this.userService.validate(code, userId)
-        .then(data => {
-
-        })
-        .catch(err => {
-            this.badSend = true;
-        });
+        return this.userService
+            .validate(code, userId)
+            .then(data => {})
+            .catch(err => {
+                this.badSend = true;
+            });
     }
 
     reject(code, userId) {

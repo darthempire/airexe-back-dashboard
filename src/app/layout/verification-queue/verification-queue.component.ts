@@ -40,6 +40,7 @@ export class VerificationQueueComponent implements OnInit {
 
     private prepareDataToTable(data) {
         for (const user of data) {
+            user.Email = _.find(user.attrs, { code: '1050' }).value;
             user.validated = _.countBy(user.attrs, { validation: 1 }).true;
             user.waiting = _.countBy(user.attrs, { validation: 0 }).true;
             this.users.push(user);

@@ -26,7 +26,10 @@
             <label for="" class="ml-5">
                 <b>User status</b>
                 <span>{{UserStatus}}</span>
-
+            </label>
+            <label for="" class="ml-5">
+                <b>User email</b>
+                <span>{{userEmail}}</span>
             </label>
         </div>
         <div class="col-md-6 col-sm-12">
@@ -41,10 +44,14 @@
                         <div class="clearfix"></div>
                     </div>
                 </div>
+                <span class="text-default">
+                    <b>Id: {{getAttribute(attributeTypes.PassportPhoto)}}</b>
+                </span><br>
                 <label for="">Passport
                     <span class="text-danger">
                         <b> * </b>
                     </span>
+
                     <span [hidden]='!(getAttributeValidation(attributeTypes.PassportPhoto) == 1)' class="badge badge-success">Verified</span>
                     <span [hidden]='!(getAttributeValidation(attributeTypes.PassportPhoto) == 2)' class="badge badge-danger">Rejected</span>
                     <span [hidden]='!(getAttributeValidation(attributeTypes.PassportPhoto) == 0)' class="badge badge-warning">Waiting verification</span>
@@ -54,7 +61,7 @@
                         <input type="radio" name="PassportPhoto" id="PassportPhoto_On" >Validate</label>
                     <label class="btn btn-warning">
                         <input type="radio" name="PassportPhoto" id="PassportPhoto_On_NA" checked disabled />Waiting</label>
-                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.PassportPhoto, statuses.Reject)">
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.PassportPhoto, statuses.Rejected)">
                         <input type="radio" name="PassportPhoto" id="PassportPhoto_On_Reject" />Reject</label>
                 </div>
             </div>
@@ -74,7 +81,7 @@
                         <input type="radio" name="FirstName" id="FirstName_On" >Validatd</label>
                     <label class="btn btn-warning">
                         <input type="radio" name="FirstName" id="FirstName_NA" checked disabled/>Waiting</label>
-                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.FirstName, statuses.Reject)">
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.FirstName, statuses.Rejected)">
                         <input type="radio" name="FirstName" id="FirstName_Reject"  />Reject</label>
                 </div>
                 <span [hidden]='!(getAttributeValidation(attributeTypes.FirstName) == 1)' class="badge badge-success mobile-position_span">Verified</span>
@@ -95,7 +102,7 @@
                         <input type="radio" name="Surname" id="Surname_On" >Validatd</label>
                     <label class="btn btn-warning">
                         <input type="radio" name="Surname" id="Surname_NA" checked disabled/>Waiting</label>
-                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.Surname, statuses.Reject)">
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.Surname, statuses.Rejected)">
                         <input type="radio" name="Surname" id="Surname_Reject"  />Reject</label>
                 </div>
                 <span [hidden]='!(getAttributeValidation(attributeTypes.Surname) == 1)' class="badge badge-success mobile-position_span">Verified</span>
@@ -110,7 +117,7 @@
                         <input type="radio" name="MiddleName" id="MiddleName_On" >Validatd</label>
                     <label class="btn btn-warning">
                         <input type="radio" name="MiddleName" id="MiddleName_NA" checked disabled/>Waiting</label>
-                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.MiddleName, statuses.Reject)">
+                    <label class="btn btn-danger" (click)="changeStatus(attributeTypes.MiddleName, statuses.Rejected)">
                         <input type="radio" name="MiddleName" id="MiddleName_Reject"  />Reject</label>
                 </div>
                 <span [hidden]='!(getAttributeValidation(attributeTypes.MiddleName) == 1)' class="badge badge-success mobile-position_span">Verified</span>
@@ -279,6 +286,9 @@
                     <!-- [imageZoom]="addressPhoto" -->
                     <img src="{{addressPhoto}}" alt="Error when uploading image" style="width: 100%; height: 100%; background: #ccc;">
                 </div>
+                <span class="text-default">
+                    <b>Id: {{getAttribute(attributeTypes.AddressPhoto)}}</b>
+                </span><br>
                 <label for="">Address Photo
                     <span [hidden]='!(getAttributeValidation(attributeTypes.AddressPhoto) == 1)' class="badge badge-success">Verified</span>
                     <span [hidden]='!(getAttributeValidation(attributeTypes.AddressPhoto) == 2)' class="badge badge-danger">Rejected</span>
@@ -319,11 +329,6 @@
             </div>
             <div class="form-group">
                 <label for="Zip" class="col-form-label">Zip:
-                    <span class='required fz-15'>
-                        <span class="text-danger">
-                            <b>*</b>
-                        </span>
-                    </span>
                 </label>
                 <input disabled value="{{getAttribute(attributeTypes.Zip)}}" class="form-control  width-custom mr-custom" id="Zip" name='Zip'>
                 <div [hidden]='getAttributeValidation(attributeTypes.Zip) == 1' class="btn-group toggle-pos  mobile-position_radio toggle-pos  mobile-position_radio " data-toggle="buttons">
@@ -455,6 +460,9 @@
                         <div class="clearfix"></div>
                     </div>
                 </div>
+                <span class="text-default">
+                    <b>Id: {{getAttribute(attributeTypes.UserPhoto)}}</b>
+                </span><br>
                 <label for="">Selfie
                     <span [hidden]='!(getAttributeValidation(attributeTypes.UserPhoto) == 1)' class="badge badge-success mobile-position_span">Verified</span>
                     <span [hidden]='!(getAttributeValidation(attributeTypes.UserPhoto) == 2)' class="badge badge-danger mobile-position_span">Rejected</span>

@@ -2,6 +2,7 @@
     <table class="table table-hover user-table">
         <thead>
             <tr>
+                <th scope="col">Email</th>
                 <th scope="col">Id</th>
                 <th scope="col">Update Date</th>
                 <th scope="col">Created Date</th>
@@ -12,7 +13,8 @@
         </thead>
         <tbody>
             <tr *ngFor='let user of users'>
-                <th scope="row">{{user.id}}</th>
+                <th scope="row">{{user.Email}}</th>
+                <th>{{user.id}}</th>
                 <td>{{user.updateDate | date: 'short'}}</td>
                 <td>{{user.createdDate | date: 'short'}}</td>
                 <td>{{user.waiting}}</td>

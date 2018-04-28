@@ -112,7 +112,7 @@ export class UserService {
 
     rejectSource(id) {
         return this.http.put(
-            `${environment.apiUrl}sources/${id}/validate`,
+            `${environment.apiUrl}sources/${id}/reject`,
             null
         );
     }
@@ -130,4 +130,64 @@ export class UserService {
             null
         );
     }
+
+    validateSourceNew(arr) {
+        const lets = [];
+        arr.forEach(element => {
+            lets.push(() => this.http.put(`
+                ${environment.apiUrl}sources/${element.value}/validate`,
+                null
+            ));
+        });
+        return this.runAsyncActionChain(lets);
+    }
+
+    rejectSourceNew(arr) {
+        const lets = [];
+        arr.forEach(element => {
+            lets.push(() => this.http.put(`
+                ${environment.apiUrl}sources/${element.value}/reject`,
+                null
+            ));
+        });
+        return this.runAsyncActionChain(lets);
+    }
+
+
+    validateNew(arr, userId) {
+        const lets = [];
+        arr.forEach(element => {
+            lets.push(() => this.http.put(
+                `${environment.apiUrl}users/${userId}/attributes/${element.code}/validate`,
+                null
+            ));
+        });
+        return this.runAsyncActionChain(lets);
+    }
+
+    rejectNew(arr, userId) {
+        const lets = [];
+        arr.forEach(element => {
+            lets.push(() => this.http.put(
+                `${environment.apiUrl}users/${userId}/attributes/${element.code}/reject`,
+                null
+            ));
+        });
+        return this.runAsyncActionChain(lets);
+    }
+
+    runAsyncActionChain(asyncActions) {
+        if (!asyncActions.length) { return Promise.resolve([]); }
+        let promise = asyncActions[0]();
+        const results = [];
+
+        for (const action of asyncActions.slice(1)) {
+          promise = promise.then(result => {
+            results.push(result);
+            return action(result);
+          });
+        }
+
+        return promise;
+      }
 }
