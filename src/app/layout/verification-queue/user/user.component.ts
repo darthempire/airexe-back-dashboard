@@ -75,7 +75,6 @@ export class UserComponent implements OnInit {
 
     ngOnInit() {
         this.getUser();
-        this.getSourses();
     }
 
     getUser() {
@@ -108,6 +107,7 @@ export class UserComponent implements OnInit {
     }
 
     getSourse(type) {
+        console.log(this.getAttribute(type));
         this.userService
             .getSourseBlob(this.getAttribute(type))
             .then(data => {
@@ -235,6 +235,7 @@ export class UserComponent implements OnInit {
                             this.rejectNew(attrs).then(result2 => {
                                 this.loaderService.display(false);
                                 this.getUser();
+                                alert('Changes Saved!');
                             });
                         });
                     });

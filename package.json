@@ -34,6 +34,8 @@
     "file-saver": "^1.3.8",
     "jquery": "^3.3.1",
     "lodash": "^4.17.5",
+    "ng2-image-hover-zoom": "^1.0.2",
+    "ng2-zoomable": "^0.1.1",
     "ng4-twitter-timeline": "^1.0.8",
     "ngtweet": "^1.0.0",
     "ngx-clipboard": "^10.0.0",

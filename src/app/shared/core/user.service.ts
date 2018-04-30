@@ -59,7 +59,9 @@ export class UserService {
     }
 
     getSourse(id) {
-        return this.http
+
+        if (id !== undefined) {
+            return this.http
             .download(`${environment.apiUrl}sources/${id}`)
             .then(data => {
                 const blob = new Blob([data['_body']], { type: 'image/jpg' });
@@ -68,11 +70,16 @@ export class UserService {
             .catch(err => {
                 console.log(err);
             });
+        }
     }
 
     getSourseBlob(id) {
-        return this.http
+        console.log(id.length);
+        if (id.length >= 0) {
+            return this.http
             .download(`${environment.apiUrl}sources/${id}`);
+        }
+
     }
 
     getReferrers() {
