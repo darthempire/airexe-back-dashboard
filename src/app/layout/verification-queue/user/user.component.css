@@ -1,5 +1,5 @@
 .width-custom {
-    width: 60% !important;
+    width: 70% !important;
 }
 
 .mr-custom {
@@ -160,7 +160,16 @@ label.btn:checked {
     height: 100px;
 }
 
+@media only screen and (max-width: 591px) {
+    .width-custom {
+        width: 95% !important;
+    }
+}
+
 @media only screen and (max-width: 768px) {
+    .width-custom {
+        width: 10% !important;
+    }
     .mobile-position_radio {
         float: none;
         top: 5px;
@@ -172,8 +181,8 @@ label.btn:checked {
         margin: 1px;
     }
     .mobile-position_span {
-        top: -70px;
-        left: 66%;
+        top: -80px;
+        left: -3%;
         position: relative;
     }
     .mobile-position_span:only-of-type {
@@ -183,5 +192,12 @@ label.btn:checked {
         top: -40px;
         left: 66%;
         position: relative;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .mobile-position_span {
+        top: -120px !important;
+        left: 60% !important;
     }
 }

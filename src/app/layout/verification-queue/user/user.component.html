@@ -32,7 +32,7 @@
                 <span>{{userEmail}}</span>
             </label>
         </div>
-        <div class="col-md-6 col-sm-12">
+        <div class="col-12">
             <div class="photoBlock col-12 mt-3">
                 <div class="border mb-3">
                     <div class="passportPhoto mb-2">
@@ -66,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-sm-12">
+        <div class="col-12">
             <div class="form-group">
                 <label for="Name" class="col-form-label">First Name:
                     <span class='required fz-15'>
@@ -174,7 +174,7 @@
                 </label>
                 <input disabled type="text" value='{{getAttribute(attributeTypes.BirthDate)}}' class="form-control  width-custom mr-custom" id="BirthDate" name='BirthDate'>
 
-                <div [hidden]='getAttributeValidation(attributeTypes.BirthDate) == 1' class="btn-group default-position " data-toggle="buttons">
+                <div [hidden]='getAttributeValidation(attributeTypes.BirthDate) == 1' class="btn-group toggle-pos mobile-position_radio" data-toggle="buttons">
                     <label class="btn btn-success" (click)="changeStatus(attributeTypes.BirthDate, statuses.Verified)">
                             <input hidden type="radio" name="BirthDate" id="BirthDate_On">Validate</label>
                     <label class="btn btn-warning">
@@ -280,11 +280,11 @@
 
             </div>
         </div>
-        <div class="col-md-6 col-sm-12">
+        <div class="col-12">
             <div class="photoBlock col-12 mt-3">
                 <div class="passportPhoto mb-2">
                     <!-- [imageZoom]="addressPhoto" -->
-                    <img  imageZoom="{{addressPhoto}}" src="{{addressPhoto}}" alt="Error when uploading image" style="width: 100%; height: 100%; background: #ccc;">
+                    <img imageZoom="{{addressPhoto}}" src="{{addressPhoto}}" alt="Error when uploading image" style="width: 100%; height: 100%; background: #ccc;">
                 </div>
                 <span class="text-default">
                     <b>Id: {{getAttribute(attributeTypes.AddressPhoto)}}</b>
@@ -304,7 +304,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-sm-12">
+        <div class="col-12">
             <div class="form-group">
                 <label for="CountryCode" class="col-form-label">Country of residence:
                     <span class='required fz-15'>
@@ -448,7 +448,7 @@
 
             </div>
         </div>
-        <div class="col-md-6 col-sm-12 mb-5">
+        <div class="col-12 mb-5">
             <div class="photoBlock col-12 mt-3">
                 <div class="border mb-3">
                     <div class="passportPhoto mb-2">
@@ -464,9 +464,9 @@
                     <b>Id: {{getAttribute(attributeTypes.UserPhoto)}}</b>
                 </span><br>
                 <label for="">Selfie
-                    <span [hidden]='!(getAttributeValidation(attributeTypes.UserPhoto) == 1)' class="badge badge-success mobile-position_span">Verified</span>
-                    <span [hidden]='!(getAttributeValidation(attributeTypes.UserPhoto) == 2)' class="badge badge-danger mobile-position_span">Rejected</span>
-                    <span [hidden]='!(getAttributeValidation(attributeTypes.UserPhoto) == 0)' class="badge badge-warning mobile-position_span">Waiting verification</span>
+                    <span [hidden]='!(getAttributeValidation(attributeTypes.UserPhoto) == 1)' class="badge badge-success mobile-position_span2">Verified</span>
+                    <span [hidden]='!(getAttributeValidation(attributeTypes.UserPhoto) == 2)' class="badge badge-danger mobile-position_span2">Rejected</span>
+                    <span [hidden]='!(getAttributeValidation(attributeTypes.UserPhoto) == 0)' class="badge badge-warning mobile-position_span2">Waiting verification</span>
 
                 </label>
                 <div [hidden]='getAttributeValidation(attributeTypes.UserPhoto) == 1' class="btn-group" data-toggle="buttons">
