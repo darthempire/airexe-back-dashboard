@@ -282,14 +282,25 @@
         </div>
         <div class="col-md-6 col-sm-12">
             <div class="photoBlock col-12 mt-3">
-                <div class="passportPhoto mb-2">
-                    <!-- [imageZoom]="addressPhoto" -->
-                    <img  imageZoom="{{addressPhoto}}" src="{{addressPhoto}}" alt="Error when uploading image" style="width: 100%; height: 100%; background: #ccc;">
-                </div>
+                    <div class="border mb-3">
+
+                            <div class="passportPhoto mb-2">
+                                <img imageZoom="{{addressPhoto}}" src="{{addressPhoto}}" alt="Error when uploading image" style="width: 100%; height: 100%; background: #ccc;">
+                            </div>
+                            <div class="zoom col-12 mb-3">
+                                <!-- <button class="btn btn-zoom float-right ml-2">+</button>
+                                <button class="btn btn-zoom float-right">-</button> -->
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+
                 <span class="text-default">
                     <b>Id: {{getAttribute(attributeTypes.AddressPhoto)}}</b>
                 </span><br>
                 <label for="">Address Photo
+                        <span class="text-danger">
+                                <b> * </b>
+                            </span>
                     <span [hidden]='!(getAttributeValidation(attributeTypes.AddressPhoto) == 1)' class="badge badge-success">Verified</span>
                     <span [hidden]='!(getAttributeValidation(attributeTypes.AddressPhoto) == 2)' class="badge badge-danger">Rejected</span>
                     <span [hidden]='!(getAttributeValidation(attributeTypes.AddressPhoto) == 0)' class="badge badge-warning">Waiting verification</span>
@@ -452,7 +463,7 @@
             <div class="photoBlock col-12 mt-3">
                 <div class="border mb-3">
                     <div class="passportPhoto mb-2">
-                        <img imageZoom="{{addressPhoto}}" src="{{userPhoto}}" alt="Error when uploading image" style="width: 100%; height: 100%; background: #ccc;">
+                        <img imageZoom="{{userPhoto}}" src="{{userPhoto}}" alt="Error when uploading image" style="width: 100%; height: 100%; background: #ccc;">
                     </div>
                     <div class="zoom col-12 mb-3">
                         <button class="btn btn-zoom float-right ml-2">+</button>

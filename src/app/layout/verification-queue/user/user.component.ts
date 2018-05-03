@@ -1,9 +1,9 @@
-import { Component, OnInit, NgModule, ElementRef } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Subscription } from "rxjs/Subscription";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { Component, OnInit, NgModule, ElementRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { UserService } from "./../../../shared/core/user.service";
+import { UserService } from './../../../shared/core/user.service';
 import { LoaderService } from './../../../shared/core/loader.service';
 import { HttpClient } from './../../../shared/utils/HttpClient';
 
@@ -51,7 +51,8 @@ export class UserComponent implements OnInit {
         AttributeTypes.City,
         AttributeTypes.Street,
         AttributeTypes.House,
-        AttributeTypes.PassportPhoto
+        AttributeTypes.PassportPhoto,
+        AttributeTypes.AddressPhoto
     ];
 
     private routeSubscription: Subscription;
@@ -107,7 +108,6 @@ export class UserComponent implements OnInit {
     }
 
     getSourse(type) {
-        console.log(this.getAttribute(type));
         this.userService
             .getSourseBlob(this.getAttribute(type))
             .then(data => {
@@ -254,32 +254,60 @@ export class UserComponent implements OnInit {
 
     verifyUser() {
         this.badSend = false;
-        this.goodSend = true;
-        this.userService
-            .verifyUser(this.id)
-            .then(data => {
-                this.goodSend = true;
-                this.getUser();
-            })
-            .catch(err => {
-                this.badSend = true;
-                this.getUser();
-            });
+        this.goodSend = false;
+        console.log(this.checkRequiredPhotos());
+        if (this.checkRequiredPhotos()) {
+            if (!this.checkRejectUser() && !this.checkRejectUser()) {
+                this.userService
+                .verifyUser(this.id)
+                .then(data => {
+                    this.goodSend = true;
+                    this.getUser();
+                    alert('Success');
+                })
+                .catch(err => {
+                    this.badSend = true;
+                    this.getUser();
+                });
+            } else {
+                alert('Have rejected field');
+            }
+        } else {
+            alert('Not all required photos');
+        }
     }
 
     rejectUser() {
         this.badSend = false;
-        this.goodSend = true;
-        this.userService
+        this.goodSend = false;
+        console.log(this.checkRejectUser());
+        if (this.checkRejectUser()) {
+            this.userService
             .rejectUser(this.id)
             .then(data => {
                 this.goodSend = true;
                 this.getUser();
+                alert('Success');
             })
             .catch(err => {
                 this.badSend = true;
                 this.getUser();
             });
+        } else {
+            alert('No fields in status Rejected');
+        }
+
+    }
+
+    checkRequiredPhotos() {
+        const value1 = _.find(this.user.attrs, { code: AttributeTypes.AddressPhoto }).value;
+        const value2 = _.find(this.user.attrs, { code: AttributeTypes.PassportPhoto }).value;
+        console.log(value2);
+        if ((value1  !== undefined || value1 !== '') && (value2  !== undefined || value2 !== '')) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     validateNew(arr) {
@@ -299,6 +327,16 @@ export class UserComponent implements OnInit {
         });
 
         return this.userService.validateNew(elements, this.id);
+    }
+
+    checkRejectUser() {
+        let result = false;
+        this.user.attrs.forEach(element => {
+            if (element.validation === this.statuses.Rejected) {
+                result = true;
+            }
+        });
+        return result;
     }
 
     rejectNew(arr) {

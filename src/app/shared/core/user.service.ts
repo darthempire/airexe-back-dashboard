@@ -74,7 +74,6 @@ export class UserService {
     }
 
     getSourseBlob(id) {
-        console.log(id.length);
         if (id.length >= 0) {
             return this.http
             .download(`${environment.apiUrl}sources/${id}`);
